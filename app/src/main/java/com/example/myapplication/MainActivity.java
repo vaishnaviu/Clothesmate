@@ -34,13 +34,20 @@ public class MainActivity extends AppCompatActivity {
         //FirebaseDatabase.getInstance().getReference().child("Information").child("1").setValue("1");
         //FirebaseDatabase.getInstance().getReference().child("Information").child("2").setValue("2");
 
+        /*write to database - for a specific object add new schema*/
+        FirebaseDatabase.getInstance().getReference().child("AddSchema").child("1").child("color").setValue("yellow");
+        FirebaseDatabase.getInstance().getReference().child("AddSchema").child("2").child("type").setValue("pants");
+        FirebaseDatabase.getInstance().getReference().child("AddSchema").child("2").child("color").setValue("red");
+        //FirebaseDatabase.getInstance().getReference().child("Information").child("2").setValue("2");
+
         /*display*/
 
         final ArrayList<String> list = new ArrayList();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_item,list);
         listView.setAdapter(adapter);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
+        //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("AddSchema");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -50,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot1:snapshot.getChildren()){
                     //Information info = snapshot1.getValue(Information.class);
                     //String txt = "Id:"+info.getId()+"Freq:"+info.getFrequency();
+                    String IdString = snapshot1.child("Id").getValue().toString();
+                    String DateString = snapshot1.child("Date").getValue().toString();
                     System.out.println("test2");
-                    String txt = " Id:"+snapshot1.getValue();
+                    String txt = " Object:"+snapshot1.getKey()+" Id:"+IdString+" Date:"+DateString;
                     list.add(txt);
                     System.out.println("test3");
 
