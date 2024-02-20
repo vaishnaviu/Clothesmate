@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UsageDetail"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/UsageDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Please Enter Weather" />
+
+    <Button
+        android:id="@+id/btnWeather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SaveWeatherToDatabase" />
+</LinearLayout>

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("Usage");
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
         reference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
