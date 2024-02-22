@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button usage;
     private ListView listView;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         inventory = findViewById(R.id.Inventory);
         usage = findViewById(R.id.usage);
         listView = findViewById(R.id.listview);
+
 
         usage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         /*display*/
 
         final ArrayList<String> list = new ArrayList();
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_item, list);
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_item1, list);
         listView.setAdapter(adapter);
 
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
@@ -139,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
         Intent resultIntent = new Intent(this,ListOfUsage.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{resultIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent resultPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{resultIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "n")
                 .setContentText("Code Sphere")

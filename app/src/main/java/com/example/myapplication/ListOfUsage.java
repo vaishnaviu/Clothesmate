@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +37,10 @@ public class ListOfUsage extends AppCompatActivity {
     private Button inventory;
     private Button usage;
 
+    private TextView dateView, idView;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,8 @@ public class ListOfUsage extends AppCompatActivity {
         inventory = findViewById(R.id.Inventory);
         usage = findViewById(R.id.usage);
         listView = findViewById(R.id.listview2);
+        dateView = findViewById(R.id.txtDate);
+        idView = findViewById(R.id.txtId);
 
         inventory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +59,9 @@ public class ListOfUsage extends AppCompatActivity {
         });
 
 
-        final ArrayList<String> list = new ArrayList();
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_item, list);
-        listView.setAdapter(adapter);
+        final ArrayList<Event> list = new ArrayList();
+        EventAdapter eventAdapter = new EventAdapter(this, R.layout.list_item, list);
+        listView.setAdapter(eventAdapter);
 
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
         //DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
@@ -72,12 +78,13 @@ public class ListOfUsage extends AppCompatActivity {
                     //String IdString = snapshot1.child("Id").getValue().toString();
                     //String DateString = snapshot1.child("Occasion").getValue().toString();
                     //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
-                    String DateString = snapshot1.getKey();
-                    String IdString = snapshot1.child("id").getValue().toString();
-                    String txt = "Date:" + DateString + "\nId:"+IdString;
-                    list.add(txt);
+                    String dateString = snapshot1.getKey();
+                    String idString = snapshot1.child("id").getValue().toString();
+                    Event newEvent = new Event(idString,dateString);
+                    //String txt = "Date:" + DateString + "\nId:"+IdString;
+                    list.add(newEvent);
                 }
-                adapter.notifyDataSetChanged();
+                eventAdapter.notifyDataSetChanged();
             }
 
 
@@ -91,9 +98,9 @@ public class ListOfUsage extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 String string = list.get(i);
+                 Event usageEvent = list.get(i);
                  Intent intent = new Intent(ListOfUsage.this,UsageDetail.class);
-                 intent.putExtra("detail",string);
+                 intent.putExtra("detail",usageEvent.getDateTime());
                  startActivity(intent);
 
             }
