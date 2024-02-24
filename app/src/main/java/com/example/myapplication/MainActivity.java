@@ -54,6 +54,21 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bottomNavigationView.setBackground(null);
 
+        if (getIntent().hasExtra("fragment_to_load")) {
+            String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
+            Fragment fragment = null;
+
+            if (fragmentToLoad.equals("ListOfUsageFragment")) {
+                fragment = new ListOfUsageFragment();
+            }
+
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout, fragment)
+                        .commit();
+            }
+        }
+
 
 
 

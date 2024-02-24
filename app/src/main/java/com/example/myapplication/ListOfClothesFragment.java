@@ -137,7 +137,8 @@ public class ListOfClothesFragment extends Fragment {
             NotificationManager manager = requireContext().getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-        Intent resultIntent = new Intent(getActivity(), ListOfUsageFragment.class);
+        Intent resultIntent = new Intent(getActivity(), MainActivity.class);
+        resultIntent.putExtra("fragment_to_load","ListOfUsageFragment");
         //PendingIntent resultPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{resultIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(getActivity(),1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
