@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ClosetMenu"
+        android:title="My Closet"
+        android:icon="@drawable/ic_launcher_background"/>
+
+    <item
+        android:id="@+id/UsageMenu"
+        android:title="Usage"
+        android:icon="@drawable/ic_launcher_background"/>
+
+    <item
+        android:id="@+id/DonationMenu"
+        android:title="Donation"
+        android:icon="@drawable/ic_launcher_background"/>
+
+    <item
+        android:id="@+id/StylingMenu"
+        android:title="Styling"
+        android:icon="@drawable/ic_launcher_background"/>
+</menu>

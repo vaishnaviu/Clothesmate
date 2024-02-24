@@ -1,66 +1,51 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ListOfUsage extends AppCompatActivity {
+public class ListOfUsageFragment extends Fragment {
     private ListView listView;
-    private Button inventory;
-    private Button usage;
 
     private TextView dateView, idView;
 
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_list_of_usage, container, false);
+        return view;
+    }
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_usage);
-        inventory = findViewById(R.id.Inventory);
-        usage = findViewById(R.id.usage);
-        listView = findViewById(R.id.listview2);
-        dateView = findViewById(R.id.txtDate);
-        idView = findViewById(R.id.txtId);
+    public void onStart() {
+        super.onStart();
+        listView = getView().findViewById(R.id.listview2);
+        dateView = getView().findViewById(R.id.txtDate);
+        idView = getView().findViewById(R.id.txtId);
 
-        inventory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openInventoryActivity();
-            }
-        });
 
 
         final ArrayList<Event> list = new ArrayList();
-        EventAdapter eventAdapter = new EventAdapter(this, R.layout.list_item, list);
+        EventAdapter eventAdapter = new EventAdapter(getActivity(), R.layout.list_item, list);
         listView.setAdapter(eventAdapter);
 
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
@@ -99,7 +84,7 @@ public class ListOfUsage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  Event usageEvent = list.get(i);
-                 Intent intent = new Intent(ListOfUsage.this,UsageDetail.class);
+                 Intent intent = new Intent(getActivity(),UsageDetail.class);
                  intent.putExtra("detail",usageEvent.getDateTime());
                  startActivity(intent);
 
@@ -113,10 +98,6 @@ public class ListOfUsage extends AppCompatActivity {
 
     }
 
-    private void openInventoryActivity() {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
 
 
 }
