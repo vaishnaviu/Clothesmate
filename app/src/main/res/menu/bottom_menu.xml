@@ -3,20 +3,20 @@
     <item
         android:id="@+id/ClosetMenu"
         android:title="My Closet"
-        android:icon="@drawable/ic_launcher_background"/>
+        android:icon="@drawable/mycloset_selector"/>
 
     <item
         android:id="@+id/UsageMenu"
         android:title="Usage"
-        android:icon="@drawable/ic_launcher_background"/>
+        android:icon="@drawable/usage_selector"/>
 
     <item
         android:id="@+id/DonationMenu"
         android:title="Donation"
-        android:icon="@drawable/ic_launcher_background"/>
+        android:icon="@drawable/donation_selector"/>
 
     <item
         android:id="@+id/StylingMenu"
         android:title="Styling"
-        android:icon="@drawable/ic_launcher_background"/>
+        android:icon="@drawable/styling_selector"/>
 </menu>

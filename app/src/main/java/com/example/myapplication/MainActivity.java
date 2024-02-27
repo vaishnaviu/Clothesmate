@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+        navView.setItemIconTintList(null);
 
         replaceFragment(new ListOfClothesFragment());
 
         binding.bottomNavigationView.setBackground(null);
+
 
         if (getIntent().hasExtra("fragment_to_load")) {
             String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
