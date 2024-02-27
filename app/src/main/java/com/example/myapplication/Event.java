@@ -33,6 +33,9 @@ public class Event {
         this.status = false;
     }
 
+    public String getWeather(){
+        return weather;
+    }
     public void setWeather(String weather){
         this.weather = weather;
     }

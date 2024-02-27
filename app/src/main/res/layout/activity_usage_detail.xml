@@ -10,18 +10,27 @@
 
 
     <TextView
-        android:id="@+id/UsageDetail"
+        android:id="@+id/DateTimeDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/IdDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/WeatherDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <EditText
-        android:id="@+id/Weather"
+        android:id="@+id/WeatherEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Please Enter Weather" />
+        android:inputType="text"/>
 
     <Button
         android:id="@+id/btnWeather"

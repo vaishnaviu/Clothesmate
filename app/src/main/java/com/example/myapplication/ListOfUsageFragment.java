@@ -85,7 +85,12 @@ public class ListOfUsageFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  Event usageEvent = list.get(i);
                  Intent intent = new Intent(getActivity(),UsageDetail.class);
-                 intent.putExtra("detail",usageEvent.getDateTime());
+                 intent.putExtra("DateTime",usageEvent.getDateTime());
+                 intent.putExtra("Id",usageEvent.getId());
+                 /*if(usageEvent.getWeather()!=null){
+
+                 }*/
+                //intent.putExtra("Weather",usageEvent.getWeather());
                  startActivity(intent);
 
             }
