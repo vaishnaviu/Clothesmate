@@ -4,6 +4,7 @@ public class Event {
     private String dateTime;
     private String id;
     private boolean status;
+    private boolean newUse=true;
 
     private String weather;
     private String occasion;
@@ -42,6 +43,10 @@ public class Event {
 
     public void setOccasion(String occasion){
         this.occasion = occasion;
+    }
+
+    public void setNewUseFalse(){
+        this.newUse=false;
     }
 
 
