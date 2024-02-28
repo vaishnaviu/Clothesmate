@@ -23,6 +23,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
     }
 
 
+
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         convertView = layoutInflater.inflate(mResource,parent,false);

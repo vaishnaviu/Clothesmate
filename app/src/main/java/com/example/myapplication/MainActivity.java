@@ -1,8 +1,9 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.R.id.ClosetMenu;
-import static com.example.myapplication.R.id.UsageMenu;
-import static com.example.myapplication.R.id.usage;
+//import static com.example.myapplication.R.id.ClosetMenu;
+//import static com.example.myapplication.R.id.UsageMenu;
+
+//import static com.example.myapplication.R.id.usage;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new ListOfClothesFragment());
             }else if(item.getItemId()==R.id.UsageMenu){
                 replaceFragment(new ListOfUsageFragment());
+            }else if(item.getItemId()==R.id.DonationMenu){
+                replaceFragment(new DonationFragment());
+            }else if(item.getItemId()==R.id.StylingMenu){
+                replaceFragment(new StylingFragment());
             }
             return true;
         });

@@ -85,7 +85,7 @@ public class ListOfUsageFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  Event usageEvent = list.get(i);
                  usageEvent.setNewUseFalse();
-                FirebaseDatabase.getInstance().getReference().child("ourtest").child(usageEvent.getDateTime()).child("newUse").setValue("false");
+                FirebaseDatabase.getInstance().getReference().child("ourtest").child(usageEvent.getDateTime()).child("newUse").setValue(0);
 
 
 
