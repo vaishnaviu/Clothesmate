@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.Typeface;
 
 import androidx.annotation.NonNull;
 
@@ -33,8 +35,22 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView idView = convertView.findViewById(R.id.txtId);
         //imageView.setImageResource(getItem(position).getImage());
 
+        //need to add an if statement to change the text
         dateView.setText(getItem(position).getDateTime());
         idView.setText(getItem(position).getId());
+        if (getItem(position).getNewUse() == 1) {
+            //dateView.setTypeface(null, Typeface.BOLD);
+            //idView.setTypeface(null, Typeface.BOLD);
+            System.out.println("changing text to RED");
+            dateView.setTextColor(Color.RED);
+            idView.setTextColor(Color.RED);
+        }else{
+            //dateView.setTypeface(null, Typeface.NORMAL);
+            //idView.setTypeface(null, Typeface.NORMAL);
+            System.out.println("changing text back to BLACK");
+            dateView.setTextColor(Color.BLACK);
+            idView.setTextColor(Color.BLACK);
+        }
 
         return convertView;
 

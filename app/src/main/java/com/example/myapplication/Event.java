@@ -4,7 +4,7 @@ public class Event {
     private String dateTime;
     private String id;
     private boolean status;
-    private int newUse=1;
+    private int newUse;
 
     private String weather;
     private String occasion;
@@ -12,10 +12,11 @@ public class Event {
     public Event(){
 
     }
-    public Event(String id, String dateTime){
+    public Event(String id, String dateTime, int newUse){
         this.id = id;
         this.dateTime = dateTime;
         this.status = true;
+        this.newUse = newUse;
 
     }
 
@@ -48,6 +49,7 @@ public class Event {
     public void setNewUseFalse(){
         this.newUse=0;
     }
+    public int getNewUse() { return newUse; }
 
 
 }

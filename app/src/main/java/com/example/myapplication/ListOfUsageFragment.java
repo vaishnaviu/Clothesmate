@@ -65,7 +65,8 @@ public class ListOfUsageFragment extends Fragment {
                     //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
                     String dateString = snapshot1.getKey();
                     String idString = snapshot1.child("id").getValue().toString();
-                    Event newEvent = new Event(idString,dateString);
+                    int newUse = snapshot1.child("newUse").getValue(Integer.class);
+                    Event newEvent = new Event(idString,dateString, newUse);
                     //String txt = "Date:" + DateString + "\nId:"+IdString;
                     list.add(newEvent);
                 }
@@ -85,7 +86,7 @@ public class ListOfUsageFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  Event usageEvent = list.get(i);
                  usageEvent.setNewUseFalse();
-                FirebaseDatabase.getInstance().getReference().child("ourtest").child(usageEvent.getDateTime()).child("newUse").setValue(0);
+                 FirebaseDatabase.getInstance().getReference().child("ourtest").child(usageEvent.getDateTime()).child("newUse").setValue(0);
 
 
 
