@@ -92,8 +92,18 @@ public class ListOfClothesFragment extends Fragment {
                     //String txt = "Id:"+info.getId()+"Freq:"+info.getFrequency();
                     String idString = snapshot1.getKey().toString();
                     String typeString = snapshot1.child("Type").getValue().toString();
+                    boolean status;
                     Clothes newClothes = new Clothes(idString,typeString);
-                    list.add(newClothes);
+                    if(snapshot1.child("Status").getValue()!=null){
+                        status = (boolean) snapshot1.child("Status").getValue();
+                        newClothes.setStatus(status);
+                        if(status){
+                            list.add(newClothes);
+                        }
+
+                    }
+
+
                 }
                 clothesAdapter.notifyDataSetChanged();
             }

@@ -32,14 +32,16 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
         TextView typeView = convertView.findViewById(R.id.txtTypeClothes);
         TextView idView = convertView.findViewById(R.id.txtIdClothes);
         //imageView.setImageResource(getItem(position).getImage());
-
-        typeView.setText(getItem(position).getType());
-        idView.setText(getItem(position).getId());
-        if(getItem(position).getType().equals("pants")){
-            imageView.setImageResource(R.drawable.ic_launcher_background);
-        }else if(getItem(position).getType().equals("dress")){
-            imageView.setImageResource(R.drawable.ic_mycloset_press);
+        if(getItem(position).isStatus()){
+            typeView.setText(getItem(position).getType());
+            idView.setText(getItem(position).getId());
+            if(getItem(position).getType().equals("pants")){
+                imageView.setImageResource(R.drawable.ic_launcher_background);
+            }else if(getItem(position).getType().equals("dress")){
+                imageView.setImageResource(R.drawable.ic_mycloset_press);
+            }
         }
+
 
         return convertView;
 
