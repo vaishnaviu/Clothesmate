@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListOfUsageFragment extends Fragment {
     private ListView listView;
@@ -48,14 +50,32 @@ public class ListOfUsageFragment extends Fragment {
         EventAdapter eventAdapter = new EventAdapter(getActivity(), R.layout.list_item, list);
         listView.setAdapter(eventAdapter);
 
+        HashMap<String,String> typeIdMap = new HashMap<>();
+
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
-        //DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                typeIdMap.clear();
+                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                    String idString = snapshot1.getKey().toString();
+                    String typeString = snapshot1.child("Type").getValue().toString();
+                    typeIdMap.put(idString,typeString);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                System.out.println("test1");
+                //System.out.println("test1");
                 System.out.println(snapshot.getChildren());
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     //Information info = snapshot1.getValue(Information.class);
@@ -65,8 +85,15 @@ public class ListOfUsageFragment extends Fragment {
                     //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
                     String dateString = snapshot1.getKey();
                     String idString = snapshot1.child("id").getValue().toString();
+<<<<<<< Updated upstream
                     int newUse = snapshot1.child("newUse").getValue(Integer.class);
                     Event newEvent = new Event(idString,dateString, newUse);
+=======
+                    String typeString = typeIdMap.get(idString);
+                    Event newEvent = new Event(idString,dateString,typeString);
+                    newEvent.setType(typeString);
+                    System.out.println("Event type:" + typeString);
+>>>>>>> Stashed changes
                     //String txt = "Date:" + DateString + "\nId:"+IdString;
                     list.add(newEvent);
                 }

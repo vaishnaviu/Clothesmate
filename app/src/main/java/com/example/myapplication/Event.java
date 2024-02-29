@@ -6,15 +6,24 @@ public class Event {
     private boolean status;
     private int newUse;
 
+
+
+    private String type;
+
     private String weather;
     private String occasion;
 
     public Event(){
 
     }
+<<<<<<< Updated upstream
     public Event(String id, String dateTime, int newUse){
+=======
+    public Event(String id, String dateTime, String type){
+>>>>>>> Stashed changes
         this.id = id;
         this.dateTime = dateTime;
+        this.type = type;
         this.status = true;
         this.newUse = newUse;
 
@@ -50,6 +59,14 @@ public class Event {
         this.newUse=0;
     }
     public int getNewUse() { return newUse; }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 
 }

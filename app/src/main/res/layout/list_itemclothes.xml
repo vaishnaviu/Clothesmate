@@ -10,34 +10,26 @@
     android:textStyle="bold" >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewClothes"
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
-    <ImageView
-        android:id="@+id/imageViewDot"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_toRightOf="@+id/txtDate"/>
-
     <TextView
-        android:id="@+id/txtDate"
-        android:layout_toRightOf="@+id/imageView"
+        android:id="@+id/txtTypeClothes"
+        android:layout_toRightOf="@+id/imageViewClothes"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date"
-        android:textStyle='bold'
+        android:text="Type"
         />
 
     <TextView
-        android:id="@+id/txtId"
-        android:layout_toRightOf="@+id/imageView"
+        android:id="@+id/txtIdClothes"
+        android:layout_toRightOf="@+id/imageViewClothes"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtDate"
+        android:layout_below="@id/txtTypeClothes"
         android:text="Id"
-        android:textStyle='bold'
         />
 </RelativeLayout>

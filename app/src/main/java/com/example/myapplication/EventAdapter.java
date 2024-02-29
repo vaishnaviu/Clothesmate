@@ -31,6 +31,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         convertView = layoutInflater.inflate(mResource,parent,false);
 
         ImageView imageView = convertView.findViewById(R.id.imageView);
+        ImageView imageViewDot = convertView.findViewById(R.id.imageViewDot);
         TextView dateView = convertView.findViewById(R.id.txtDate);
         TextView idView = convertView.findViewById(R.id.txtId);
         //imageView.setImageResource(getItem(position).getImage());
@@ -38,6 +39,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         //need to add an if statement to change the text
         dateView.setText(getItem(position).getDateTime());
         idView.setText(getItem(position).getId());
+<<<<<<< Updated upstream
         if (getItem(position).getNewUse() == 1) {
             //dateView.setTypeface(null, Typeface.BOLD);
             //idView.setTypeface(null, Typeface.BOLD);
@@ -51,6 +53,17 @@ public class EventAdapter extends ArrayAdapter<Event> {
             dateView.setTextColor(Color.BLACK);
             idView.setTextColor(Color.BLACK);
         }
+=======
+        imageViewDot.setImageResource(R.drawable.donation_selector);
+        if(getItem(position).getType()!=null){
+            if(getItem(position).getType().equals("pants")){
+                imageView.setImageResource(R.drawable.ic_launcher_background);
+            }else if(getItem(position).getType().equals("dress")){
+                imageView.setImageResource(R.drawable.ic_mycloset_press);
+            }
+        }
+
+>>>>>>> Stashed changes
 
         return convertView;
 

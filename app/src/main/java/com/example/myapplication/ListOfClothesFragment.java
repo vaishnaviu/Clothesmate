@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,8 @@ public class ListOfClothesFragment extends Fragment {
 
     private ListView listView;
 
+    private TextView typeView, idView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class ListOfClothesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = getView().findViewById(R.id.listview);
+        typeView = getView().findViewById(R.id.txtTypeClothes);
+        idView = getView().findViewById(R.id.txtIdClothes);
+
 
 
 
@@ -68,9 +74,9 @@ public class ListOfClothesFragment extends Fragment {
 
         /*display*/
 
-        final ArrayList<String> list = new ArrayList();
-        final ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item1, list);
-        listView.setAdapter(adapter);
+        final ArrayList<Clothes> list = new ArrayList();
+        ClothesAdapter clothesAdapter = new ClothesAdapter(getActivity(), R.layout.list_itemclothes, list);
+        listView.setAdapter(clothesAdapter);
 
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
@@ -79,17 +85,17 @@ public class ListOfClothesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                System.out.println("test1");
+                //System.out.println("test1");
                 System.out.println(snapshot.getChildren());
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     //Information info = snapshot1.getValue(Information.class);
                     //String txt = "Id:"+info.getId()+"Freq:"+info.getFrequency();
-                    String IdString = snapshot1.child("Color").getValue().toString();
-                    String DateString = snapshot1.child("Type").getValue().toString();
-                    String txt = " Object:" + snapshot1.getKey() + " Color:" + IdString + " Type:" + DateString;
-                    list.add(txt);
+                    String idString = snapshot1.getKey().toString();
+                    String typeString = snapshot1.child("Type").getValue().toString();
+                    Clothes newClothes = new Clothes(idString,typeString);
+                    list.add(newClothes);
                 }
-                adapter.notifyDataSetChanged();
+                clothesAdapter.notifyDataSetChanged();
             }
 
 
