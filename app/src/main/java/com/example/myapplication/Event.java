@@ -16,18 +16,14 @@ public class Event {
     public Event(){
 
     }
-<<<<<<< Updated upstream
-    public Event(String id, String dateTime, int newUse){
-=======
-    public Event(String id, String dateTime, String type){
->>>>>>> Stashed changes
+
+    public Event(String id, String dateTime, int newUse, String type){
         this.id = id;
         this.dateTime = dateTime;
-        this.type = type;
-        this.status = true;
         this.newUse = newUse;
-
+        this.type = type;
     }
+
 
     public String getId(){
         return id;

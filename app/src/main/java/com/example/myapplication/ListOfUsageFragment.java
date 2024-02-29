@@ -85,15 +85,11 @@ public class ListOfUsageFragment extends Fragment {
                     //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
                     String dateString = snapshot1.getKey();
                     String idString = snapshot1.child("id").getValue().toString();
-<<<<<<< Updated upstream
                     int newUse = snapshot1.child("newUse").getValue(Integer.class);
-                    Event newEvent = new Event(idString,dateString, newUse);
-=======
                     String typeString = typeIdMap.get(idString);
-                    Event newEvent = new Event(idString,dateString,typeString);
+                    Event newEvent = new Event(idString,dateString, newUse, typeString);
                     newEvent.setType(typeString);
                     System.out.println("Event type:" + typeString);
->>>>>>> Stashed changes
                     //String txt = "Date:" + DateString + "\nId:"+IdString;
                     list.add(newEvent);
                 }

@@ -39,7 +39,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
         //need to add an if statement to change the text
         dateView.setText(getItem(position).getDateTime());
         idView.setText(getItem(position).getId());
-<<<<<<< Updated upstream
         if (getItem(position).getNewUse() == 1) {
             //dateView.setTypeface(null, Typeface.BOLD);
             //idView.setTypeface(null, Typeface.BOLD);
@@ -53,7 +52,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
             dateView.setTextColor(Color.BLACK);
             idView.setTextColor(Color.BLACK);
         }
-=======
         imageViewDot.setImageResource(R.drawable.donation_selector);
         if(getItem(position).getType()!=null){
             if(getItem(position).getType().equals("pants")){
@@ -63,7 +61,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         }
 
->>>>>>> Stashed changes
 
         return convertView;
 
