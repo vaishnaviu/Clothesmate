@@ -24,6 +24,11 @@ public class Event {
         this.type = type;
     }
 
+    public Event(String id, String dateTime, String type){
+        this.id = id;
+        this.dateTime = dateTime;
+        this.type = type;
+    }
 
     public String getId(){
         return id;

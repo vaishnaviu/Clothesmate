@@ -1,64 +1,121 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DonationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DonationFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DonationFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DonationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DonationFragment newInstance(String param1, String param2) {
-        DonationFragment fragment = new DonationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    private ListView listView;
+    private TextView dateView, idView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_donation, container, false);
     }
+    @SuppressLint("MissingInflatedId")
+    @Override
+    public void onStart() {
+        super.onStart();
+        listView = getView().findViewById(R.id.listview2);
+        dateView = getView().findViewById(R.id.txtDate);
+        idView = getView().findViewById(R.id.txtId);
+
+        final ArrayList<Event> donationList = new ArrayList();
+        DonationEventAdapter donationEventAdapter = new DonationEventAdapter(getActivity(), R.layout.list_item1, donationList);
+        listView.setAdapter(donationEventAdapter);
+
+        HashMap<String,String> typeIdMap = new HashMap<>();
+
+        DatabaseReference inventoryRef = FirebaseDatabase.getInstance().getReference().child("Inventory");
+        DatabaseReference donationRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
+        inventoryRef.addValueEventListener(new ValueEventListener() {
+        @Override
+
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            typeIdMap.clear();
+            for(DataSnapshot snapshot1:snapshot.getChildren()){
+                String idString = snapshot1.getKey().toString();
+                String typeString = snapshot1.child("Type").getValue().toString();
+                typeIdMap.put(idString,typeString);
+            }
+        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        donationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                donationList.clear();
+//                System.out.println("test1");
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    String dateTimeString = snapshot1.getKey();
+                    System.out.println("date time string" + dateTimeString);
+
+                    String[] dateSplit = dateTimeString.split(" ");
+                    String dateString = dateSplit[0];
+                    System.out.println("Date: " + dateString);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime timestamp = LocalDateTime.parse(dateTimeString, formatter);
+
+                    LocalDateTime currentTime = LocalDateTime.now();
+                    LocalDateTime sixMonthsAgo = currentTime.minus(6, ChronoUnit.MONTHS);
+
+                    if (timestamp.isBefore(sixMonthsAgo)) {
+                        String idString = snapshot1.child("id").getValue().toString();
+
+                        inventoryRef.child(idString).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    String typeString = snapshot.child("Type").getValue(String.class);
+                                    Event newEvent = new Event(idString,dateString, typeString);
+                                    donationList.add(newEvent);
+                                    donationEventAdapter.notifyDataSetChanged();
+                                }
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+                }
+                donationEventAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }
