@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DonationFragment extends Fragment {
     private ListView listView;
@@ -38,66 +39,45 @@ public class DonationFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = getView().findViewById(R.id.listview2);
-        dateView = getView().findViewById(R.id.txtDate);
-        idView = getView().findViewById(R.id.txtId);
 
-        final ArrayList<Event> donationList = new ArrayList();
+        final ArrayList<Event> donationList = new ArrayList<>();
         DonationEventAdapter donationEventAdapter = new DonationEventAdapter(getActivity(), R.layout.list_item1, donationList);
         listView.setAdapter(donationEventAdapter);
 
-        HashMap<String,String> typeIdMap = new HashMap<>();
-
         DatabaseReference inventoryRef = FirebaseDatabase.getInstance().getReference().child("Inventory");
         DatabaseReference donationRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
-        inventoryRef.addValueEventListener(new ValueEventListener() {
-        @Override
-
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            typeIdMap.clear();
-            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                String idString = snapshot1.getKey().toString();
-                String typeString = snapshot1.child("Type").getValue().toString();
-                typeIdMap.put(idString,typeString);
-            }
-        }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         donationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                donationList.clear();
-//                System.out.println("test1");
+                Map<String, LocalDateTime> latestTimestamps = new HashMap<>();
+
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    String dateTimeString = snapshot1.getKey();
-                    System.out.println("date time string" + dateTimeString);
-
-                    String[] dateSplit = dateTimeString.split(" ");
-                    String dateString = dateSplit[0];
-                    System.out.println("Date: " + dateString);
-
+                    String timestampString = snapshot1.getKey();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    LocalDateTime timestamp = LocalDateTime.parse(dateTimeString, formatter);
+                    LocalDateTime timestamp = LocalDateTime.parse(timestampString, formatter);
 
-                    LocalDateTime currentTime = LocalDateTime.now();
-                    LocalDateTime sixMonthsAgo = currentTime.minus(6, ChronoUnit.MONTHS);
+                    String idString = snapshot1.child("id").getValue().toString();
+                    latestTimestamps.put(idString, timestamp);
+                }
 
-                    if (timestamp.isBefore(sixMonthsAgo)) {
-                        String idString = snapshot1.child("id").getValue().toString();
+                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDateTime twelveMonthsAgo = currentTime.minus(12, ChronoUnit.MONTHS);
 
+                for (Map.Entry<String, LocalDateTime> entry : latestTimestamps.entrySet()) {
+                    String idString = entry.getKey();
+                    LocalDateTime latestTimestamp = entry.getValue();
+
+                    if (latestTimestamp.isBefore(twelveMonthsAgo)) {
                         inventoryRef.child(idString).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.exists()){
+                                if (snapshot.exists()) {
                                     String typeString = snapshot.child("Type").getValue(String.class);
-                                    Event newEvent = new Event(idString,dateString, typeString);
+                                    Event newEvent = new Event(idString, latestTimestamp.toString(), typeString);
                                     donationList.add(newEvent);
                                     donationEventAdapter.notifyDataSetChanged();
                                 }
-
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
