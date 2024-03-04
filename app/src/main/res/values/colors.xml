@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="turquoise">#FF44D0C3</color>
     <color name="gray">#FF666666</color>
+    <color name="medium_gray">#FF999999</color>
     <color name="light_gray">#FFF8F8F8</color>
     <color name="transparent">#00ffffff</color>
 </resources>

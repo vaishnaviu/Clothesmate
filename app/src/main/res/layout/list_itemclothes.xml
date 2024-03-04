@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/imageViewClothes"
             android:layout_width="72dp"
-            android:layout_height="72dp" />
+            android:layout_height="72dp"/>
 
         <ImageView
             android:id="@+id/imageViewDelete"
@@ -40,8 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Type"
             android:fontFamily='sans-serif-medium'
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/txtIdClothes"
@@ -52,7 +51,6 @@
             android:layout_below="@id/txtTypeClothes"
             android:text="Id"
             android:fontFamily='sans-serif'
-            android:textColor="@color/gray"
-            />
+            android:textColor="@color/gray"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

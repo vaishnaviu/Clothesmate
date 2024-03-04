@@ -22,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 public class UsageDetail extends AppCompatActivity {
     private Button btnweather;
 
-    String[] weatherItems = {"sunny","rainy","windy","cloudy","snowy"};
-    String[] occasionItems = {"formal","casual","semi-formal"};
+    String[] weatherItems = {"Sunny","Rainy","Windy","Cloudy","Snowy"};
+    String[] occasionItems = {"Formal","Casual","Semi-formal"};
 
     AutoCompleteTextView autoCompleteTextViewWeather, autoCompleteTextViewOccasion;
     ArrayAdapter<String> adapterItemsWeather;
@@ -47,8 +47,8 @@ public class UsageDetail extends AppCompatActivity {
         autoCompleteTextViewWeather = findViewById(R.id.auto_complete_weathertxt);
         autoCompleteTextViewOccasion = findViewById(R.id.auto_complete_occasiontxt);
 
-        adapterItemsWeather = new ArrayAdapter<String>(this, R.layout.list_dropdownitem,weatherItems);
-        adapterItemsOccasion = new ArrayAdapter<String>(this,R.layout.list_dropdownitem,occasionItems);
+        adapterItemsWeather = new ArrayAdapter<String>(this, R.layout.custom_dropdown_item_layout,weatherItems);
+        adapterItemsOccasion = new ArrayAdapter<String>(this,R.layout.custom_dropdown_item_layout,occasionItems);
 
         autoCompleteTextViewWeather.setAdapter(adapterItemsWeather);
         autoCompleteTextViewOccasion.setAdapter(adapterItemsOccasion);

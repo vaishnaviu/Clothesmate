@@ -13,7 +13,7 @@
         <item name="android:color">@color/transparent</item>
     </style>
 
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication"/>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">32sp</item>

@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="72dp"
-            android:layout_height="72dp" />
+            android:layout_height="72dp"/>
 
     <!--    <ImageView-->
     <!--        android:id="@+id/imageViewEventDelete"-->
@@ -33,7 +33,7 @@
             android:layout_width="40dp"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/txtDate" />
+            android:layout_toRightOf="@+id/txtDate"/>
 
         <TextView
             android:id="@+id/txtDate"
@@ -42,8 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:fontFamily='sans-serif-medium'
-            />
+            android:fontFamily='sans-serif-medium'/>
 
         <TextView
             android:id="@+id/txtId"
@@ -54,7 +53,6 @@
             android:layout_below="@id/txtDate"
             android:text="Id"
             android:fontFamily='sans-serif'
-            android:textColor='@color/gray'
-            />
+            android:textColor='@color/gray'/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

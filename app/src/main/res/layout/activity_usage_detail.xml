@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".UsageDetail"
     android:orientation="vertical">
 
@@ -11,74 +12,201 @@
         android:id="@+id/new_toolbar"
         layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/DateTimeDetail"
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="25dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:outlineSpotShadowColor="@color/light_gray"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/label"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="30dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/DateTimeDetailTitle"
+                android:layout_below="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/DateTimeDetail"
+                android:layout_below="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="TextView"
+                android:textColor="@color/gray"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+            <TextView
+                android:id="@+id/IdDetailTitle"
+                android:layout_below="@+id/DateTimeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="ID"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/IdDetail"
+                android:layout_below="@+id/DateTimeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textColor="@color/gray"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+            <TextView
+                android:id="@+id/WeatherDetailTitle"
+                android:layout_below="@+id/IdDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Weather"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/WeatherDetail"
+                android:layout_below="@+id/IdDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Not Selected"
+                android:textColor="@color/gray"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+            <TextView
+                android:id="@+id/OccasionDetailTitle"
+                android:layout_below="@+id/WeatherDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Occasion"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/OccasionDetail"
+                android:layout_below="@+id/WeatherDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Not Selected"
+                android:textColor="@color/gray"
+                android:fontFamily="sans-serif"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
-        android:id="@+id/IdDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/WeatherDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NoWeather"/>
-    <TextView
-        android:id="@+id/OccasionDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NoOccasion"/>
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Weather"/>
+        android:layout_marginStart="30dp"
+        android:text="Weather"
+        android:fontFamily="sans-serif-medium"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/select"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:boxBackgroundColor="@color/white"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:textColorHint="@color/medium_gray">
 
         <AutoCompleteTextView
             android:id="@+id/auto_complete_weathertxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:textSize="12dp"
+            android:inputType="none"
+            android:popupBackground="@drawable/custom_dropdown_item_background"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Occasion"/>
+        android:layout_marginStart="30dp"
+        android:text="Occasion"
+        android:fontFamily="sans-serif-medium"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/select"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:boxBackgroundColor="@color/white"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:textColorHint="@color/medium_gray">
 
         <AutoCompleteTextView
             android:id="@+id/auto_complete_occasiontxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:textSize="12dp"
+            android:inputType="none"
+            android:popupBackground="@drawable/custom_dropdown_item_background"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/btnWeather"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SaveWeatherToDatabase" />
+        android:layout_height="54dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"
+        android:text="Save Changes"/>
 </LinearLayout>
