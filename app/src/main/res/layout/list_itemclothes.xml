@@ -14,6 +14,12 @@
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
+    <ImageView
+        android:id="@+id/imageViewDelete"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_toRightOf="@+id/txtTypeClothes"/>
+
     <TextView
         android:id="@+id/txtTypeClothes"
         android:layout_toRightOf="@+id/imageViewClothes"

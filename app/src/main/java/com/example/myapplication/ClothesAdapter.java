@@ -10,6 +10,12 @@ package com.example.myapplication;
 
         import androidx.annotation.NonNull;
 
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
+
         import java.util.ArrayList;
 
 public class ClothesAdapter extends ArrayAdapter<Clothes> {
@@ -29,10 +35,54 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
         convertView = layoutInflater.inflate(mResource,parent,false);
 
         ImageView imageView = convertView.findViewById(R.id.imageViewClothes);
+        ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDelete);
         TextView typeView = convertView.findViewById(R.id.txtTypeClothes);
         TextView idView = convertView.findViewById(R.id.txtIdClothes);
         //imageView.setImageResource(getItem(position).getImage());
-        if(getItem(position).isStatus()){
+        imageViewDelete.setImageResource(R.drawable.ic_styling_press);
+
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
+        imageViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String clothesIdString = getItem(position).getId();
+                FirebaseDatabase.getInstance().getReference().child("Inventory").child(clothesIdString).child("status").setValue(0);
+                //ArrayList<Event> eventList = new ArrayList<>();
+
+                reference2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //eventList.clear();
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                            String dateString = snapshot1.getKey();
+                            int status = ((Long) snapshot1.child("status").getValue()).intValue();
+                            String idString = snapshot1.child("id").getValue().toString();
+                            if(idString.equals(clothesIdString)){
+                                FirebaseDatabase.getInstance().getReference().child("ourtest").child(dateString).child("status").setValue(0);
+                            }
+                        }
+                        reference2.removeEventListener(this);//without this, once a delete icon is clicked, I was not able to reset associated event status back to 1.
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+
+
+                            }
+        });
+
+
+
+        if(getItem(position).isStatusTrue()){
             typeView.setText(getItem(position).getType());
             idView.setText(getItem(position).getId());
             if(getItem(position).getType().equals("pants")){
@@ -41,6 +91,9 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
                 imageView.setImageResource(R.drawable.ic_mycloset_press);
             }
         }
+
+
+
 
 
         return convertView;

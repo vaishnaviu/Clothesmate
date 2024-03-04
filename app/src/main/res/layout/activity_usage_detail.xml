@@ -23,14 +23,56 @@
     <TextView
         android:id="@+id/WeatherDetail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/WeatherEdit"
+        android:layout_height="wrap_content"
+        android:text="NoWeather"/>
+    <TextView
+        android:id="@+id/OccasionDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"/>
+        android:text="NoOccasion"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Weather"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/select"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_weathertxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Occasion"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/select"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_occasiontxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/btnWeather"

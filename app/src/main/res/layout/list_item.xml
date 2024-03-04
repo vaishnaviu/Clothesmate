@@ -14,11 +14,17 @@
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewEventDelete"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_toRightOf="@+id/txtDate"/>-->
+
     <ImageView
         android:id="@+id/imageViewDot"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_toRightOf="@+id/txtDate"/>
+        android:layout_toRightOf="@+id/txtDate" />
 
     <TextView
         android:id="@+id/txtDate"

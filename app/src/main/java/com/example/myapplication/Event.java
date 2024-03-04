@@ -3,7 +3,7 @@ package com.example.myapplication;
 public class Event {
     private String dateTime;
     private String id;
-    private boolean status;
+    private int status;
     private int newUse;
 
 
@@ -15,6 +15,10 @@ public class Event {
 
     public Event(){
 
+    }
+
+    public Event(String dateTime){
+        this.dateTime = dateTime;
     }
 
     public Event(String id, String dateTime, int newUse, String type){
@@ -38,11 +42,11 @@ public class Event {
         return dateTime;
     }
 
-    public boolean getStatus(){
+    public int getStatus(){
         return status;
     }
     public void setStatusFalse(){
-        this.status = false;
+        this.status = 0;
     }
 
     public String getWeather(){

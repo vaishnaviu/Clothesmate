@@ -89,9 +89,15 @@ public class ListOfUsageFragment extends Fragment {
                     String typeString = typeIdMap.get(idString);
                     Event newEvent = new Event(idString,dateString, newUse, typeString);
                     newEvent.setType(typeString);
+                    int status;
                     System.out.println("Event type:" + typeString);
                     //String txt = "Date:" + DateString + "\nId:"+IdString;
-                    list.add(newEvent);
+                    if(snapshot1.child("status").getValue()!=null){
+                        status = ((Long) snapshot1.child("status").getValue()).intValue();
+                        if(status==1){
+                            list.add(newEvent);
+                        }
+                    }
                 }
                 eventAdapter.notifyDataSetChanged();
             }

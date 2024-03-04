@@ -3,7 +3,7 @@ package com.example.myapplication;
 public class Clothes {
 
     private String id;
-    private boolean status;
+    private int status;
 
     private String type;
     private String imageUrl;
@@ -22,11 +22,11 @@ public class Clothes {
         this.id = id;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isStatusTrue() {
+        return status==1;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -92,12 +92,12 @@ public class ListOfClothesFragment extends Fragment {
                     //String txt = "Id:"+info.getId()+"Freq:"+info.getFrequency();
                     String idString = snapshot1.getKey().toString();
                     String typeString = snapshot1.child("Type").getValue().toString();
-                    boolean status;
+                    int status;
                     Clothes newClothes = new Clothes(idString,typeString);
-                    if(snapshot1.child("Status").getValue()!=null){
-                        status = (boolean) snapshot1.child("Status").getValue();
+                    if(snapshot1.child("status").getValue()!=null){
+                        status = ((Long) snapshot1.child("status").getValue()).intValue();
                         newClothes.setStatus(status);
-                        if(status){
+                        if(status==1){
                             list.add(newClothes);
                         }
 
