@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -32,7 +33,10 @@ public class DonationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_donation, container, false);
+        View view = inflater.inflate(R.layout.fragment_donation, container, false);
+        Toolbar toolbar = view.findViewById(R.id.new_toolbar);
+        toolbar.setTitle("Donation Suggestion");
+        return view;
     }
     @SuppressLint("MissingInflatedId")
     @Override

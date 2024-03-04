@@ -39,7 +39,7 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
         TextView typeView = convertView.findViewById(R.id.txtTypeClothes);
         TextView idView = convertView.findViewById(R.id.txtIdClothes);
         //imageView.setImageResource(getItem(position).getImage());
-        imageViewDelete.setImageResource(R.drawable.ic_styling_press);
+        imageViewDelete.setImageResource(R.drawable.ic_delete);
 
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
         imageViewDelete.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +86,16 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
             typeView.setText(getItem(position).getType());
             idView.setText(getItem(position).getId());
             if(getItem(position).getType().equals("pants")){
-                imageView.setImageResource(R.drawable.ic_launcher_background);
+                imageView.setImageResource(R.drawable.image_pants);
             }else if(getItem(position).getType().equals("dress")){
-                imageView.setImageResource(R.drawable.ic_mycloset_press);
+                imageView.setImageResource(R.drawable.image_dress);
+            }else if(getItem(position).getType().equals("shirt")){
+                imageView.setImageResource(R.drawable.image_shirt);
+            }else if(getItem(position).getType().equals("shoes")){
+                imageView.setImageResource(R.drawable.image_shoes);
             }
+        }else{
+            imageView.setImageResource(R.drawable.image_no_style);
         }
 
 

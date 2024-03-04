@@ -55,7 +55,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
             dateView.setTextColor(Color.BLACK);
             idView.setTextColor(Color.BLACK);
         }
-        imageViewDot.setImageResource(R.drawable.donation_selector);
+        imageViewDot.setImageResource(R.drawable.ic_new);
         //imageViewEventDelete.setImageResource(R.drawable.ic_styling_press);
 
         /*imageViewEventDelete.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +66,16 @@ public class EventAdapter extends ArrayAdapter<Event> {
         });*/
         if(getItem(position).getType()!=null){
             if(getItem(position).getType().equals("pants")){
-                imageView.setImageResource(R.drawable.ic_launcher_background);
+                imageView.setImageResource(R.drawable.image_pants);
             }else if(getItem(position).getType().equals("dress")){
-                imageView.setImageResource(R.drawable.ic_mycloset_press);
+                imageView.setImageResource(R.drawable.image_dress);
+            }else if(getItem(position).getType().equals("shirt")){
+                imageView.setImageResource(R.drawable.image_shirt);
+            }else if(getItem(position).getType().equals("shoes")){
+                imageView.setImageResource(R.drawable.image_shoes);
             }
+        }else{
+            imageView.setImageResource(R.drawable.image_no_style);
         }
 
 

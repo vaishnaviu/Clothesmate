@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
@@ -34,6 +35,8 @@ public class ListOfUsageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_of_usage, container, false);
+        Toolbar toolbar = view.findViewById(R.id.new_toolbar);
+        toolbar.setTitle("Usage");
         return view;
     }
     @SuppressLint("MissingInflatedId")

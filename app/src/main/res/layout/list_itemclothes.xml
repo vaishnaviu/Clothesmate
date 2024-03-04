@@ -1,41 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/label"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dp"
-    android:textSize="16dp"
-    android:textStyle="bold" >
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="20dp"
+    app:cardCornerRadius="25dp"
+    android:layout_width="match_parent"
+    android:outlineSpotShadowColor="@color/light_gray"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageViewClothes"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="16dp" >
 
-    <ImageView
-        android:id="@+id/imageViewDelete"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_toRightOf="@+id/txtTypeClothes"/>
+        <ImageView
+            android:id="@+id/imageViewClothes"
+            android:layout_width="72dp"
+            android:layout_height="72dp" />
 
-    <TextView
-        android:id="@+id/txtTypeClothes"
-        android:layout_toRightOf="@+id/imageViewClothes"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Type"
-        />
+        <ImageView
+            android:id="@+id/imageViewDelete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:id="@+id/txtIdClothes"
-        android:layout_toRightOf="@+id/imageViewClothes"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtTypeClothes"
-        android:text="Id"
-        />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtTypeClothes"
+            android:layout_toRightOf="@+id/imageViewClothes"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/txtIdClothes"
+            android:layout_toRightOf="@+id/imageViewClothes"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtTypeClothes"
+            android:text="Id"
+            android:fontFamily='sans-serif'
+            android:textColor="@color/gray"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:src="@drawable/logo_launcher"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

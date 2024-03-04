@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,6 +47,8 @@ public class ListOfClothesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_of_clothes, container, false);
+        Toolbar toolbar = view.findViewById(R.id.new_toolbar);
+        toolbar.setTitle("My Clothes");
         return view;
     }
     @SuppressLint("MissingInflatedId")

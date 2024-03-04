@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,9 @@ public class UsageDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usage_detail);
         btnweather = findViewById(R.id.btnWeather);
+
+        Toolbar toolbar = findViewById(R.id.new_toolbar);
+        toolbar.setTitle("Usage Details");
 
         TextView dateView = findViewById(R.id.DateTimeDetail);
         TextView idView = findViewById(R.id.IdDetail);

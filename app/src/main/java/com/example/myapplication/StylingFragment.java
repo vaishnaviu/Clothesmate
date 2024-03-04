@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -59,6 +60,9 @@ public class StylingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_styling, container, false);
+        View view = inflater.inflate(R.layout.fragment_styling, container, false);
+        Toolbar toolbar = view.findViewById(R.id.new_toolbar);
+        toolbar.setTitle("Styling Suggestion");
+        return view;
     }
 }
