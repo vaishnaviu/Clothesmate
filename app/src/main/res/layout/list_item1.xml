@@ -11,7 +11,7 @@
     android:outlineSpotShadowColor="@color/light_gray"
     android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,6 +21,13 @@
             android:id="@+id/imageView"
             android:layout_width="72dp"
             android:layout_height="72dp"/>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginLeft="141dp"
+            android:layout_toRightOf="@+id/txtDate" />
 
         <TextView
             android:id="@+id/txtDate"
