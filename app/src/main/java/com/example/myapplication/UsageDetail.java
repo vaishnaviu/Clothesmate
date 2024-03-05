@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +45,8 @@ public class UsageDetail extends AppCompatActivity {
         TextView weatherView = findViewById(R.id.WeatherDetail);
         TextView occasionView = findViewById(R.id.OccasionDetail);
 
+        ImageView imageView = findViewById(R.id.imageView);
+
         autoCompleteTextViewWeather = findViewById(R.id.auto_complete_weathertxt);
         autoCompleteTextViewOccasion = findViewById(R.id.auto_complete_occasiontxt);
 
@@ -56,6 +59,21 @@ public class UsageDetail extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         dateView.setText(bundle.getString("DateTime"));
         idView.setText(bundle.getString("Id"));
+        String typeString = bundle.getString("Type");
+        if(typeString!=null){
+            if(typeString.equals("pants")){
+                imageView.setImageResource(R.drawable.image_pants);
+            }else if(typeString.equals("dress")){
+                imageView.setImageResource(R.drawable.image_dress);
+            }else if(typeString.equals("shirt")){
+                imageView.setImageResource(R.drawable.image_shirt);
+            }else if(typeString.equals("shoes")){
+                imageView.setImageResource(R.drawable.image_shoes);
+            }
+        }else{
+            imageView.setImageResource(R.drawable.image_no_style);
+        }
+
 
 
 
