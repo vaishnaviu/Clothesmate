@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
+
 public class StylingAdapter extends ArrayAdapter<Event> {
     private Context mContext;
     private int mResource;
