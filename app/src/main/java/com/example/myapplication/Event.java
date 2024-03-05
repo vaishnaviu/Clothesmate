@@ -50,6 +50,10 @@ public class Event {
         this.status = 0;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public String getWeather(){
         return weather;
     }
@@ -68,6 +72,10 @@ public class Event {
     }
     public int getNewUse() { return newUse; }
 
+    public boolean isStatusTrue() {
+        return status==1;
+    }
+
     public String getType() {
         return type;
     }
@@ -75,6 +83,5 @@ public class Event {
     public void setType(String type) {
         this.type = type;
     }
-
 
 }
