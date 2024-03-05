@@ -22,6 +22,13 @@
             android:layout_width="72dp"
             android:layout_height="72dp"/>
 
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
         <TextView
             android:id="@+id/txtDate"
             android:layout_toRightOf="@+id/imageView"

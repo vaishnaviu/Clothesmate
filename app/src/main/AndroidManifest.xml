@@ -26,6 +26,9 @@
             android:name=".UsageDetail"
             android:exported="false" />
         <activity
+            android:name=".DonationFragment"
+            android:exported="false" />
+        <activity
             android:name=".ListOfUsageFragment"
             android:exported="true" />
         <activity

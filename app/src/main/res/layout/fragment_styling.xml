@@ -10,14 +10,85 @@
         android:id="@+id/new_toolbar"
         layout="@layout/toolbar"/>
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="285dp"
-        android:layout_height="387dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvWeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="Weather"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@+id/new_toolbar"/>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilWeather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/select"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:boxBackgroundColor="@color/white"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:textColorHint="@color/medium_gray"
+        app:layout_constraintTop_toBottomOf="@id/tvWeatherTitle">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_weathertxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:inputType="none"
+            android:popupBackground="@drawable/custom_dropdown_item_background"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvOccasionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="Occasion"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/tilWeather"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilOccasion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/select"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:boxBackgroundColor="@color/white"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:textColorHint="@color/medium_gray"
+        app:layout_constraintTop_toBottomOf="@id/tvOccasionTitle">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_occasiontxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:inputType="none"
+            android:popupBackground="@drawable/custom_dropdown_item_background"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Existing layout components... -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
