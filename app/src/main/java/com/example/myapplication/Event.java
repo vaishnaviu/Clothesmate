@@ -6,6 +6,7 @@ public class Event {
     private int status;
     private int newUse;
 
+    private String color;
 
 
     private String type;
@@ -59,6 +60,8 @@ public class Event {
     public void setOccasion(String occasion){
         this.occasion = occasion;
     }
+
+    public String getColor(){return color;}
 
     public void setNewUseFalse(){
         this.newUse=0;
