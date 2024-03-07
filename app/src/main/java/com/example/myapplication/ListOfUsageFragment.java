@@ -125,6 +125,7 @@ public class ListOfUsageFragment extends Fragment {
                  Intent intent = new Intent(getActivity(),UsageDetail.class);
                  intent.putExtra("DateTime",usageEvent.getDateTime());
                  intent.putExtra("Id",usageEvent.getId());
+                 intent.putExtra("Type",usageEvent.getType());
                  /*if(usageEvent.getWeather()!=null){
 
                  }*/
