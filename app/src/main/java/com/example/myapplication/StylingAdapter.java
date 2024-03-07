@@ -49,12 +49,14 @@ public class StylingAdapter extends ArrayAdapter<Map<String, Object>> {
                 imageView.setImageResource(R.drawable.image_shirt);
             } else if (getItem(position).get("Type").equals("shoes")) {
                 imageView.setImageResource(R.drawable.image_shoes);
+            } else if (getItem(position).get("Type").equals("jacket")) {
+                imageView.setImageResource(R.drawable.image_jacket);
             } else {
                 imageView.setImageResource(R.drawable.image_no_style);
             }
 
             idTextView.setText("ID: " + id);
-            typeTextView.setText(type);
+            typeTextView.setText("Type: " +type);
             colorTextView.setText(color);
         }
 

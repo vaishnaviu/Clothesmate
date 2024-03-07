@@ -83,8 +83,8 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
 
 
         if(getItem(position).isStatusTrue()){
-            typeView.setText(getItem(position).getType());
-            idView.setText(getItem(position).getId());
+            typeView.setText("Type: " + getItem(position).getType());
+            idView.setText("ID: " + getItem(position).getId());
             if(getItem(position).getType().equals("pants")){
                 imageView.setImageResource(R.drawable.image_pants);
             }else if(getItem(position).getType().equals("dress")){
@@ -93,6 +93,8 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
                 imageView.setImageResource(R.drawable.image_shirt);
             }else if(getItem(position).getType().equals("shoes")){
                 imageView.setImageResource(R.drawable.image_shoes);
+            }else if(getItem(position).getType().equals("jacket")) {
+                imageView.setImageResource(R.drawable.image_jacket);
             }
         }else{
             imageView.setImageResource(R.drawable.image_no_style);
