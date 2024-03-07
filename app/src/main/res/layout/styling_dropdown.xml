@@ -1,90 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/light_gray"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textAppearance="?attr/textAppearanceSubtitle1">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Weather"
-        android:fontFamily="sans-serif-medium"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/select"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        android:textColorHint="@color/medium_gray">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_weathertxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:inputType="none"
-            android:popupBackground="@drawable/custom_dropdown_item_background"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Occasion"
-        android:fontFamily="sans-serif-medium"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/select"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        app:boxBackgroundColor="@color/white"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        android:textColorHint="@color/medium_gray">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_occasiontxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:inputType="none"
-            android:popupBackground="@drawable/custom_dropdown_item_background"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnSuggestStyle"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"
-        android:text="Generate Styling Suggestions"/>
-</LinearLayout>
+</TextView>

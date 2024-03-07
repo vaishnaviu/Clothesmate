@@ -170,7 +170,4 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
         }
         return false; // No checkbox is selected
     }
-
-
-
 }
