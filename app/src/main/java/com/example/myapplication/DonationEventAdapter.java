@@ -66,9 +66,8 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             imageView.setImageResource(R.drawable.image_shirt);
         } else if (getItem(position).getType().equals("shoes")) {
             imageView.setImageResource(R.drawable.image_shoes);
-        }
-         else {
-        imageView.setImageResource(R.drawable.image_no_style);
+        } else {
+            imageView.setImageResource(R.drawable.image_no_style);
         }
 
         Event currentEvent = getItem(position);

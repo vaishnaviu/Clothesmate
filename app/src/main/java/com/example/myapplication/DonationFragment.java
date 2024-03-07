@@ -32,7 +32,7 @@ import java.util.Map;
 public class DonationFragment extends Fragment implements DonationEventAdapter.CheckBoxListener {
 
     private ListView listView;
-    private Button btnDonate;
+    private Button btnDonate, btnSelect, btnClear;
     private DonationEventAdapter donationEventAdapter;
     private List<Event> donationList;
     private DatabaseReference inventoryRef;
@@ -54,6 +54,8 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
         super.onStart();
         listView = getView().findViewById(R.id.listview2);
         btnDonate = getView().findViewById(R.id.btnDonate);
+        btnSelect = getView().findViewById(R.id.btnSelect);
+        btnClear = getView().findViewById(R.id.btnClear);
 
         donationList = new ArrayList<>();
         donationEventAdapter = new DonationEventAdapter(getActivity(), R.layout.list_item1, donationList);
@@ -116,6 +118,20 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
             }
         });
 
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectAllCheckboxes(true);
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectAllCheckboxes(false);
+            }
+        });
         btnDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,12 +153,16 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
     private void donateSelectedItems() {
         Iterator<Event> iterator = donationList.iterator();
 
+        System.out.println("Donation List: " + donationList);
+
         while (iterator.hasNext()) {
             Event event = iterator.next();
 
             if (event.getStatus() == 1) {
                 String timestamp = event.getDateTime();
                 String itemId = event.getId();
+
+                System.out.println("Timestamp, itemID: "+timestamp + " "+itemId);
 
                 // Update the status in the donation reference using the timestamp as the key
                 DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("ourtest").child(timestamp);
@@ -160,6 +180,13 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
         donationEventAdapter.notifyDataSetChanged();
 
         Toast.makeText(getActivity(), "Selected items donated!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void selectAllCheckboxes(boolean isSelected) {
+        for (Event event : donationList) {
+            event.setStatus(isSelected ? 1 : 0);
+        }
+        donationEventAdapter.notifyDataSetChanged();
     }
 
     private boolean anyCheckboxSelected() {
