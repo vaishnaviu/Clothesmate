@@ -44,18 +44,11 @@ public class EventAdapter extends ArrayAdapter<Event> {
         idView.setText("ID: " +getItem(position).getId());
         if (getItem(position).getNewUse() == 1) {
             //dateView.setTypeface(null, Typeface.BOLD);
-            //idView.setTypeface(null, Typeface.BOLD);
-            System.out.println("changing text to RED");
-            dateView.setTextColor(Color.RED);
-            idView.setTextColor(Color.RED);
-        }else{
-            //dateView.setTypeface(null, Typeface.NORMAL);
-            //idView.setTypeface(null, Typeface.NORMAL);
-            System.out.println("changing text back to BLACK");
-            dateView.setTextColor(Color.BLACK);
-            idView.setTextColor(Color.BLACK);
+
+
+            imageViewDot.setImageResource(R.drawable.ic_new);
         }
-        imageViewDot.setImageResource(R.drawable.ic_new);
+
         //imageViewEventDelete.setImageResource(R.drawable.ic_styling_press);
 
         /*imageViewEventDelete.setOnClickListener(new View.OnClickListener() {
