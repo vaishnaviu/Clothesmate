@@ -42,17 +42,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:fontFamily='sans-serif-medium'/>
+            android:textSize="16sp"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"/>/>
 
         <TextView
             android:id="@+id/txtId"
             android:layout_toRightOf="@+id/imageView"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtDate"
             android:text="Id"
+            android:textSize="12sp"
             android:fontFamily='sans-serif'
-            android:textColor='@color/gray'/>
+            android:textColor="@color/gray"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

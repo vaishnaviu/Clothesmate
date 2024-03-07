@@ -11,52 +11,59 @@
     android:outlineSpotShadowColor="@color/light_gray"
     android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView2"
             android:layout_width="72dp"
-            android:layout_height="72dp"/>
+            android:layout_height="72dp" />
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
 
         <TextView
             android:id="@+id/txtDate"
-            android:layout_toRightOf="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/imageView2"
             android:text="Date"
-            android:fontFamily='sans-serif-medium'/>
+            android:textSize="16sp"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/txtId"
-            android:layout_toRightOf="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtDate"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView2"
             android:text="Id"
+            android:textSize="12sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>
 
         <TextView
             android:id="@+id/txtType"
-            android:layout_toRightOf="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtId"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView2"
             android:text="Type"
+            android:textSize="12sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>
 

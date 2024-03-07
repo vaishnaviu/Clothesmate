@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,8 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class StylingFragment extends Fragment {
 
@@ -43,6 +46,20 @@ public class StylingFragment extends Fragment {
         weatherAutoCompleteTextView = view.findViewById(R.id.auto_complete_weathertxt);
         occasionAutoCompleteTextView = view.findViewById(R.id.auto_complete_occasiontxt);
 
+        Button btnSuggestStyle = view.findViewById(R.id.btnSuggestStyle);
+        btnSuggestStyle.setOnClickListener(v -> {
+            String selectedWeather = weatherAutoCompleteTextView.getText().toString();
+            String selectedOccasion = occasionAutoCompleteTextView.getText().toString();
+
+            System.out.println("Selected weather and occasion: " + selectedWeather + " " + selectedOccasion);
+
+            if (!selectedWeather.isEmpty() && !selectedOccasion.isEmpty()) {
+                generateStylingSuggestions(selectedWeather, selectedOccasion);
+            } else {
+                showToast("Please select both weather and occasion.");
+            }
+        });
+
         // Set up AutoCompleteTextView adapters for weather and occasion
         ArrayAdapter<String> weatherAdapter = new ArrayAdapter<>(requireContext(), R.layout.styling_dropdown, getWeatherOptions());
         weatherAutoCompleteTextView.setAdapter(weatherAdapter);
@@ -50,68 +67,143 @@ public class StylingFragment extends Fragment {
         ArrayAdapter<String> occasionAdapter = new ArrayAdapter<>(requireContext(), R.layout.styling_dropdown, getOccasionOptions());
         occasionAutoCompleteTextView.setAdapter(occasionAdapter);
 
-        // Listen for changes in both weather and occasion AutoCompleteTextViews
-        weatherAutoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> onWeatherOccasionSelected());
-        occasionAutoCompleteTextView.setOnItemClickListener((parent, view12, position, id) -> onWeatherOccasionSelected());
-
         // Get a reference to the Firebase database
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         // Load inventory and usage data from Firebase
         loadDataFromFirebase();
-
         return view;
-    }
-
-    private void onWeatherOccasionSelected() {
-        String selectedWeather = weatherAutoCompleteTextView.getText().toString();
-        String selectedOccasion = occasionAutoCompleteTextView.getText().toString();
-
-        if (!selectedWeather.isEmpty() && !selectedOccasion.isEmpty()) {
-            generateStylingSuggestions(selectedWeather, selectedOccasion);
-        }
     }
 
     private void generateStylingSuggestions(String selectedWeather, String selectedOccasion) {
         List<Map<String, Object>> filteredItems = filterInventoryByWeatherOccasion(selectedWeather, selectedOccasion);
-        String mostFrequentType = findMostFrequentType(filteredItems);
 
-        if (mostFrequentType != null) {
-            Map<String, Object> suggestedItem = findSuggestedItem(mostFrequentType);
-            if (suggestedItem != null) {
-                String type = suggestedItem.get("Type").toString();
-                String color = suggestedItem.get("Color").toString();
+        System.out.println("generateStylingSuggestions filteredItems: " + filteredItems);
 
-                ArrayList<Event> suggestions = new ArrayList<>();
-                suggestions.add(new Event(type));
+        List<Map<String, Object>> uniqueItemsList = createUniqueItemsList(filteredItems);
 
-                StylingAdapter adapter = new StylingAdapter(requireContext(), R.layout.item_styling, suggestions);
-                listView.setAdapter(adapter);
-            } else {
-                showToast("No suitable outfit found for the selected weather and occasion.");
-            }
+        if (!uniqueItemsList.isEmpty()) {
+            StylingAdapter adapter = new StylingAdapter(requireContext(), R.layout.item_styling, uniqueItemsList);
+            listView.setAdapter(adapter);
         } else {
-            showToast("No matching outfits found for the selected weather and occasion.");
+            showToast("No unique items found for the selected weather and occasion.");
         }
+    }
+
+    private List<Map<String, Object>> createUniqueItemsList(List<Map<String, Object>> items) {
+        List<Map<String, Object>> uniqueItemsList = new ArrayList<>();
+        Set<String> uniqueItemSet = new HashSet<>();
+
+        for (Map<String, Object> item : items) {
+            String itemId = item.get("Id") != null ? item.get("Id").toString() : "";
+            String type = item.get("Type") != null ? item.get("Type").toString() : "";
+            String color = item.get("Color") != null ? item.get("Color").toString() : "";
+
+            String uniqueKey = itemId + type + color;
+
+            if (!uniqueItemSet.contains(uniqueKey)) {
+                uniqueItemSet.add(uniqueKey);
+                uniqueItemsList.add(item);
+            }
+        }
+
+        return uniqueItemsList;
+    }
+
+    private Map<String, Integer> calculateTypeFrequency(List<Map<String, Object>> items) {
+        Map<String, Integer> typeFrequency = new HashMap<>();
+        for (Map<String, Object> item : items) {
+            String type = item.get("Type").toString();
+            typeFrequency.put(type, typeFrequency.getOrDefault(type, 0) + 1);
+        }
+        return typeFrequency;
+    }
+
+    private String getMostFrequentType(Map<String, Integer> typeFrequency) {
+        int maxFrequency = 0;
+        String mostFrequentType = null;
+        for (Map.Entry<String, Integer> entry : typeFrequency.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentType = entry.getKey();
+            }
+        }
+        return mostFrequentType;
+    }
+
+    private List<Map<String, Object>> getSuggestedItemsForType(String type, List<Map<String, Object>> items) {
+        List<Map<String, Object>> suggestedItems = new ArrayList<>();
+
+        // Filter items based on the specified type
+        for (Map<String, Object> item : items) {
+            String itemTypeId = item.get("Type").toString();
+            if (itemTypeId.equals(type)) {
+                suggestedItems.add(item);
+            }
+        }
+
+        // Sort items by frequency (descending order)
+        suggestedItems.sort((item1, item2) -> {
+            int frequency1 = calculateItemFrequency(type, items);
+            int frequency2 = calculateItemFrequency(type, items);
+            return Integer.compare(frequency2, frequency1);
+        });
+
+        return suggestedItems;
+    }
+
+    private int calculateItemFrequency(String type, List<Map<String, Object>> items) {
+        int frequency = 0;
+        for (Map<String, Object> item : items) {
+            String itemTypeId = item.get("Type").toString();
+            if (itemTypeId.equals(type)) {
+                frequency++;
+            }
+        }
+        return frequency;
+    }
+
+    private ArrayList<Map<String, Object>> createItemListFromItems(List<Map<String, Object>> items) {
+        ArrayList<Map<String, Object>> itemList = new ArrayList<>();
+        for (Map<String, Object> item : items) {
+            Map<String, Object> itemDetails = new HashMap<>();
+            String itemId = item.get("Id").toString();
+            String type = item.get("Type").toString();
+            String color = item.get("Color").toString();
+
+            itemDetails.put("Id", itemId);
+            itemDetails.put("Type", type);
+            itemDetails.put("Color", color);
+            itemList.add(itemDetails);
+        }
+        return itemList;
     }
 
     private List<Map<String, Object>> filterInventoryByWeatherOccasion(String weather, String occasion) {
         List<Map<String, Object>> filteredItems = new ArrayList<>();
-        for (Map.Entry<String, Map<String, Object>> entry : usageData.entrySet()) {
-            Map<String, Object> itemData = entry.getValue();
-            String itemWeather = itemData.get("weather") != null ? itemData.get("weather").toString() : "";
-            String itemOccasion = itemData.get("occasion") != null ? itemData.get("occasion").toString() : "";
-            String itemId = itemData.get("id") != null ? itemData.get("id").toString() : "";
-            int itemStatus = getIntegerValue(itemData, "status");
+
+        for (Map.Entry<String, Map<String, Object>> timestampEntry : usageData.entrySet()) {
+            Map<String, Object> timestampData = timestampEntry.getValue();
+            String itemWeather = timestampData.get("weather") != null ? timestampData.get("weather").toString() : "";
+            String itemOccasion = timestampData.get("occasion") != null ? timestampData.get("occasion").toString() : "";
+            String itemId = timestampData.get("id").toString();
+            int itemStatus = getIntegerValue(timestampData, "status");
 
             if (itemWeather.equalsIgnoreCase(weather) &&
                     itemOccasion.equalsIgnoreCase(occasion) &&
-                    !itemId.isEmpty()) {
+                    !itemId.isEmpty() &&
+                    itemStatus == 1) {
+
+                // Fetch type and color from the Inventory collection using the ID
                 Map<String, Object> inventoryItem = inventory.get(itemId);
-                if (inventoryItem != null &&
-                        getIntegerValue(inventoryItem, "status") == 1 &&
-                        itemStatus == 1) {
-                    filteredItems.add(inventoryItem);
+
+                // Add Id, type, and color to the filtered items
+                if (inventoryItem != null) {
+                    Map<String, Object> filteredItem = new HashMap<>();
+                    filteredItem.put("Id", itemId);
+                    filteredItem.put("Type", inventoryItem.get("Type"));
+                    filteredItem.put("Color", inventoryItem.get("Color"));
+                    filteredItems.add(filteredItem);
                 }
             }
         }
@@ -129,48 +221,43 @@ public class StylingFragment extends Fragment {
         }
     }
 
-    private String findMostFrequentType(List<Map<String, Object>> items) {
-        Map<String, Long> typeFrequency = new HashMap<>();
-        for (Map<String, Object> item : items) {
-            String type = item.get("Type").toString();
-            typeFrequency.put(type, typeFrequency.getOrDefault( type, 0L) + 1);
-        }
-
-        int maxFrequency = 0;
-        String mostFrequentType = null;
-        for (Map.Entry<String, Long> entry : typeFrequency.entrySet()) {
-            if (entry.getValue() > maxFrequency) {
-                maxFrequency = Math.toIntExact(entry.getValue());
-                mostFrequentType = entry.getKey();
-            }
-        }
-        return mostFrequentType;
-    }
-
-
-    private Map<String, Object> findSuggestedItem(String type) {
-        for (Map.Entry<String, Map<String, Object>> entry : inventory.entrySet()) {
-            Map<String, Object> item = entry.getValue();
-            if (item.get("Type").toString().equalsIgnoreCase(type) &&
-                    (int) item.get("status") == 1 &&
-                    !usageData.containsKey(entry.getKey())) {
-                return item;
-            }
-        }
-        return null;
-    }
-
     private void loadDataFromFirebase() {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference inventoryRef = databaseReference.child("Inventory");
+        DatabaseReference usageDataRef = databaseReference.child("ourtest");
+
+        inventoryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                inventory = (Map<String, Map<String, Object>>) dataSnapshot.child("Inventory").getValue();
-                usageData = (Map<String, Map<String, Object>>) dataSnapshot.child("ourtest").getValue();
+                inventory = new HashMap<>();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String itemId = childSnapshot.getKey();
+                    Map<String, Object> itemData = (Map<String, Object>) childSnapshot.getValue();
+                    inventory.put(itemId, itemData);
+                }
+                System.out.println("Inventory data loaded: " + inventory);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                showToast("Failed to load data from Firebase: " + databaseError.getMessage());
+                showToast("Failed to load Inventory data from Firebase: " + databaseError.getMessage());
+            }
+        });
+
+        usageDataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usageData = new HashMap<>();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String timestamp = childSnapshot.getKey();
+                    Map<String, Object> userData = (Map<String, Object>) childSnapshot.getValue();
+                    usageData.put(timestamp, userData);
+                }
+                System.out.println("Usage data loaded: " + usageData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                showToast("Failed to load Usage data from Firebase: " + databaseError.getMessage());
             }
         });
     }

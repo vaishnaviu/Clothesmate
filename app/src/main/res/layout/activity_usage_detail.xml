@@ -200,13 +200,36 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnWeather"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"
-        android:text="Save Changes"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:layout_alignParentBottom="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_gray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="0.5dp"
+                android:layout_height="94dp"
+                android:background="@color/white" />
+
+            <Button
+                android:id="@+id/btnWeather"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:text="Save Changes"
+                android:layout_gravity="center_vertical"/>
+        </FrameLayout>
+    </RelativeLayout>
 </LinearLayout>
