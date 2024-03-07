@@ -13,19 +13,100 @@
     <ListView
         android:id="@+id/listview2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
 
         android:layout_marginTop="84dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
         android:divider="@null"
         android:dividerHeight="20dp"/>
 
+    <FrameLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="174.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="0.5dp"
+            android:layout_height="60dp"
+            android:background="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelect"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12sp"
+            android:text="Select all"
+            android:layout_gravity="start"
+            android:background="@drawable/small_button"
+            android:elevation="0dp"
+            android:textAllCaps="false"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClear"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12sp"
+            android:text="Clear all"
+            android:layout_gravity="end"
+            android:background="@drawable/small_button"
+            android:elevation="0dp"
+            android:textAllCaps="false"/>
+    </FrameLayout>
+
+    <FrameLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="0.5dp"
+            android:layout_height="94dp"
+            android:background="@color/white" />
+
+        <Button
+            android:id="@+id/btnDonate"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"
+            android:text="Donate"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

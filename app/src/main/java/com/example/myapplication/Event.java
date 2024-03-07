@@ -6,12 +6,16 @@ public class Event {
     private int status;
     private int newUse;
 
+    private String color;
 
 
     private String type;
 
     private String weather;
     private String occasion;
+
+    private boolean isSelected;
+
 
     public Event(){
 
@@ -34,6 +38,8 @@ public class Event {
         this.type = type;
     }
 
+
+
     public String getId(){
         return id;
     }
@@ -47,6 +53,10 @@ public class Event {
     }
     public void setStatusFalse(){
         this.status = 0;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getWeather(){
@@ -65,13 +75,28 @@ public class Event {
     }
     public int getNewUse() { return newUse; }
 
+    public boolean isStatusTrue() {
+        return status==1;
+    }
+
     public String getType() {
         return type;
     }
+
+    public String getColor(){return color;}
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
 
 }
+

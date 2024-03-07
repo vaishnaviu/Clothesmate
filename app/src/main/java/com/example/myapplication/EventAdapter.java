@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.Typeface;
 
 import androidx.annotation.NonNull;
 
@@ -40,11 +41,14 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         //need to add an if statement to change the text
         dateView.setText(getItem(position).getDateTime());
-        idView.setText(getItem(position).getId());
+        idView.setText("ID: " +getItem(position).getId());
         if (getItem(position).getNewUse() == 1) {
+            //dateView.setTypeface(null, Typeface.BOLD);
+
+
             imageViewDot.setImageResource(R.drawable.ic_new);
         }
-        //imageViewDot.setImageResource(R.drawable.ic_new);
+
         //imageViewEventDelete.setImageResource(R.drawable.ic_styling_press);
 
         /*imageViewEventDelete.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +66,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 imageView.setImageResource(R.drawable.image_shirt);
             }else if(getItem(position).getType().equals("shoes")){
                 imageView.setImageResource(R.drawable.image_shoes);
+            }else if(getItem(position).getType().equals("jacket")) {
+                imageView.setImageResource(R.drawable.image_jacket);
             }
         }else{
             imageView.setImageResource(R.drawable.image_no_style);
