@@ -30,9 +30,23 @@ android:layout_height="wrap_content">
         android:layout_marginLeft="20dp"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@+id/imageView2"
-        android:fontFamily='sans-serif'
         android:text="Id"
-        android:textColor="@color/gray" />
+        android:textSize="16sp"
+        android:fontFamily='sans-serif-medium'
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/txtType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtId"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/imageView2"
+        android:text="Type"
+        android:textSize="12sp"
+        android:fontFamily='sans-serif'
+        android:textColor="@color/gray"/>
 
     <TextView
         android:id="@+id/txtColor"
@@ -43,19 +57,9 @@ android:layout_height="wrap_content">
         android:layout_below="@id/txtType"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="4dp"
+        android:textSize="12sp"
         android:fontFamily='sans-serif'
-        android:textColor="@color/gray" />
-
-    <TextView
-        android:id="@+id/txtType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtId"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/imageView2"
-        android:fontFamily='sans-serif'
-        android:text="Type"
-        android:textColor="@color/gray" />
+        android:textColor="@color/gray"/>
 
 </RelativeLayout>
 </androidx.cardview.widget.CardView>

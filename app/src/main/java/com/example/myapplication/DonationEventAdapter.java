@@ -55,8 +55,8 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
         String formattedDate = dateTime.format(formatter);
 
         dateView.setText(formattedDate);
-        typeView.setText(getItem(position).getType());
-        idView.setText(getItem(position).getId());
+        typeView.setText("Type: " +getItem(position).getType());
+        idView.setText("ID: " +getItem(position).getId());
 
         if (getItem(position).getType().equals("pants")) {
             imageView.setImageResource(R.drawable.image_pants);
@@ -66,8 +66,12 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             imageView.setImageResource(R.drawable.image_shirt);
         } else if (getItem(position).getType().equals("shoes")) {
             imageView.setImageResource(R.drawable.image_shoes);
-        } else {
-            imageView.setImageResource(R.drawable.image_no_style);
+        } else if (getItem(position).getType().equals("jacket")) {
+            imageView.setImageResource(R.drawable.image_jacket);
+        }
+         else {
+        imageView.setImageResource(R.drawable.image_no_style);
+
         }
 
         Event currentEvent = getItem(position);

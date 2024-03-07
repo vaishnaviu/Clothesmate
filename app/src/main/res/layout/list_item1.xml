@@ -36,8 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/imageView2"
+            android:text="Date"
+            android:textSize="16sp"
             android:fontFamily='sans-serif-medium'
-            android:text="Date" />
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/txtId"
@@ -47,9 +49,10 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/imageView2"
-            android:fontFamily='sans-serif'
             android:text="Id"
-            android:textColor="@color/gray" />
+            android:textSize="12sp"
+            android:fontFamily='sans-serif'
+            android:textColor="@color/gray"/>
 
         <TextView
             android:id="@+id/txtType"
@@ -57,10 +60,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtId"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/imageView2"
-            android:fontFamily='sans-serif'
             android:text="Type"
-            android:textColor="@color/gray" />
+            android:textSize="12sp"
+            android:fontFamily='sans-serif'
+            android:textColor="@color/gray"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

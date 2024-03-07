@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:text="Weather"
             android:fontFamily="sans-serif-medium"/>
 
@@ -100,30 +101,42 @@
 
     <Button
         android:id="@+id/btnSuggestStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         app:layout_constraintTop_toBottomOf="@id/linearlayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-medium"
         android:textSize="16sp"
-        android:text="Generate Styling Suggestions" />
+        android:text="Generate Styling Suggestions"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnSuggestStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/suggestions"
+        android:text="Suggestions Based on Your Style"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14sp"/>
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/btnSuggestStyle"
+        app:layout_constraintTop_toBottomOf="@id/suggestions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:divider="@null"
+        android:dividerHeight="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
