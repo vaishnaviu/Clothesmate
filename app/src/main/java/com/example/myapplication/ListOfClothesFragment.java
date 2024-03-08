@@ -118,10 +118,10 @@ public class ListOfClothesFragment extends Fragment {
             }
         });
 
-        reference2.addChildEventListener(new ChildEventListener() {
+        /*reference2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                notification();
+                //notification();
             }
 
             @Override
@@ -143,21 +143,24 @@ public class ListOfClothesFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
 
 
-    private void notification() {
+   /* private void notification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
                     new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
 
-            NotificationManager manager = requireContext().getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            if(isAdded()){
+                NotificationManager manager = requireContext().getSystemService(NotificationManager.class);
+                manager.createNotificationChannel(channel);
+            }
+
         }
         Intent resultIntent = new Intent(getActivity(), MainActivity.class);
-        resultIntent.putExtra("fragment_to_load","ListOfUsageFragment");
+        resultIntent.putExtra("","ListOfUsageFragment");
         //PendingIntent resultPendingIntent = PendingIntent.getActivities(this,1, new Intent[]{resultIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(getActivity(),1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
@@ -190,5 +193,5 @@ public class ListOfClothesFragment extends Fragment {
             return;
         }
         managerCompat.notify(999, builder.build());
-    }
+    }*/
 }
