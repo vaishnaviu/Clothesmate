@@ -95,7 +95,7 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             onCheckBoxStateChanged(currentEvent, isChecked);
         });
 
-        if (getItem(position).getType().equals("pants")) {
+        /*if (getItem(position).getType().equals("pants")) {
             imageView.setImageResource(R.drawable.image_pants);
         } else if (getItem(position).getType().equals("dress")) {
             imageView.setImageResource(R.drawable.image_dress);
@@ -105,7 +105,7 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             imageView.setImageResource(R.drawable.image_shoes);
         } else {
             imageView.setImageResource(R.drawable.image_no_style);
-        }
+        }*/
 
         return convertView;
     }
