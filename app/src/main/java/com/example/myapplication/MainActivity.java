@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setBackground(null);
 
 
-        if (getIntent().hasExtra("fragment_to_load")) {
-            String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
+        if (getIntent().hasExtra("")) {
+            String fragmentToLoad = getIntent().getStringExtra("");
             Fragment fragment = null;
 
             if (fragmentToLoad.equals("ListOfUsageFragment")) {

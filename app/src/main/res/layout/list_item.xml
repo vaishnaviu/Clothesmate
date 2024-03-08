@@ -28,35 +28,81 @@
     <!--        android:layout_height="60dp"-->
     <!--        android:layout_toRightOf="@+id/txtDate"/>-->
 
+        <TextView
+            android:id="@+id/txtType"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="16sp"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtId"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_below="@id/txtType"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:textSize="12sp"
+            android:fontFamily='sans-serif'
+            android:textColor="@color/gray"/>
+
         <ImageView
             android:id="@+id/imageViewDot"
             android:layout_width="40dp"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/txtDate"/>
+            android:layout_toRightOf="@+id/txtType"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="72dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:background="@color/button_gray"/>
 
         <TextView
-            android:id="@+id/txtDate"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_marginLeft="20dp"
+            android:id="@+id/txtUsed"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="16sp"
+            android:text="Last used"
+            android:textSize="12sp"
             android:fontFamily='sans-serif-medium'
-            android:textColor="@color/black"/>/>
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/txtId"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_marginLeft="20dp"
+            android:id="@+id/txtTime"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/txtUsed"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtDate"
-            android:text="Id"
-            android:textSize="12sp"
+            android:text="Time"
+            android:textSize="16sp"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/txtTime"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="10sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -87,8 +87,22 @@ public class ListOfUsageFragment extends Fragment {
                     //String DateString = snapshot1.child("Occasion").getValue().toString();
                     //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
                     String dateString = snapshot1.getKey();
-                    String idString = snapshot1.child("id").getValue().toString();
-                    int newUse = snapshot1.child("newUse").getValue(Integer.class);
+
+                    String idString = "";
+                    if (snapshot1.child("id").getValue() != null) {
+                        idString = snapshot1.child("id").getValue().toString();
+                    } else {
+                        System.out.println("null idString");
+                    }
+                    //String idString = snapshot1.child("id").getValue().toString();
+                    System.out.println("id test"+idString+"date"+dateString);
+                    int newUse=0;
+                    if(snapshot1.child("newUse").getValue()!=null){
+                        newUse = snapshot1.child("newUse").getValue(Integer.class);
+                    }else{
+                        System.out.println("null newUse");
+                    }
+
                     String typeString = typeIdMap.get(idString);
                     Event newEvent = new Event(idString,dateString, newUse, typeString);
                     newEvent.setType(typeString);
@@ -100,6 +114,8 @@ public class ListOfUsageFragment extends Fragment {
                         if(status==1){
                             list.add(newEvent);
                         }
+                    }else{
+                        System.out.println("no status available");
                     }
                 }
                 eventAdapter.notifyDataSetChanged();
