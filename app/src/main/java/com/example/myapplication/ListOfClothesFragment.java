@@ -146,7 +146,7 @@ public class ListOfClothesFragment extends Fragment {
         });*/
 
     }
-
+    //As we have implemented the newUse function, no notificaiton is needed.
 
    /* private void notification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
