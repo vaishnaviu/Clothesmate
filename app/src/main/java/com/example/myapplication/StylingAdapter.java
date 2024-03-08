@@ -34,12 +34,10 @@ public class StylingAdapter extends ArrayAdapter<Map<String, Object>> {
         if (item != null) {
             TextView idTextView = convertView.findViewById(R.id.txtId);
             TextView typeTextView = convertView.findViewById(R.id.txtType);
-            TextView colorTextView = convertView.findViewById(R.id.txtColor);
             ImageView imageView = convertView.findViewById(R.id.imageView2);
 
             String id = item.get("Id") != null ? item.get("Id").toString() : "";
             String type =item.get("Type") != null ? item.get("Type").toString() : "";
-            String color = item.get("Color") != null ? item.get("Color").toString() : "";
 
             if (getItem(position).get("Type").equals("pants")) {
                 imageView.setImageResource(R.drawable.image_pants);
@@ -56,8 +54,7 @@ public class StylingAdapter extends ArrayAdapter<Map<String, Object>> {
             }
 
             idTextView.setText("ID: " + id);
-            typeTextView.setText("Type: " +type);
-            colorTextView.setText(color);
+            typeTextView.setText(type);
         }
 
         return convertView;

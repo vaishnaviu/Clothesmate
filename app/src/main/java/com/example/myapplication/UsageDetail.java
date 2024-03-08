@@ -69,6 +69,8 @@ public class UsageDetail extends AppCompatActivity {
                 imageView.setImageResource(R.drawable.image_shirt);
             }else if(typeString.equals("shoes")){
                 imageView.setImageResource(R.drawable.image_shoes);
+            }else if(typeString.equals("jacket")){
+                imageView.setImageResource(R.drawable.image_jacket);
             }
         }else{
             imageView.setImageResource(R.drawable.image_no_style);

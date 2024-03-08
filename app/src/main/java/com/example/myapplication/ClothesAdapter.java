@@ -83,7 +83,7 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
 
 
         if(getItem(position).isStatusTrue()){
-            typeView.setText("Type: " + getItem(position).getType());
+            typeView.setText(getItem(position).getType());
             idView.setText("ID: " + getItem(position).getId());
             if(getItem(position).getType().equals("pants")){
                 imageView.setImageResource(R.drawable.image_pants);
