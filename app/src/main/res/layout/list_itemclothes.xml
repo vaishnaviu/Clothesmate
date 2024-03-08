@@ -33,29 +33,28 @@
             android:layout_marginRight="20dp"/>
 
         <TextView
-            android:id="@+id/txtIdClothes"
+            android:id="@+id/txtTypeClothes"
             android:layout_toRightOf="@+id/imageViewClothes"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Id"
+            android:text="Type"
             android:textSize="16sp"
             android:fontFamily='sans-serif-medium'
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/txtTypeClothes"
+            android:id="@+id/txtIdClothes"
             android:layout_toRightOf="@+id/imageViewClothes"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtIdClothes"
-            android:text="Type"
+            android:layout_below="@id/txtTypeClothes"
+            android:text="Id"
             android:textSize="12sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>
-
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

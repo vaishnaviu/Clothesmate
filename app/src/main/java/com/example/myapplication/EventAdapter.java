@@ -36,11 +36,15 @@ public class EventAdapter extends ArrayAdapter<Event> {
         ImageView imageViewDot = convertView.findViewById(R.id.imageViewDot);
         //ImageView imageViewEventDelete = convertView.findViewById(R.id.imageViewEventDelete);
         TextView dateView = convertView.findViewById(R.id.txtDate);
+        TextView timeView = convertView.findViewById(R.id.txtTime);
+        TextView typeView = convertView.findViewById(R.id.txtType);
         TextView idView = convertView.findViewById(R.id.txtId);
         //imageView.setImageResource(getItem(position).getImage());
 
         //need to add an if statement to change the text
-        dateView.setText(getItem(position).getDateTime());
+        dateView.setText(getItem(position).getDate());
+        timeView.setText(getItem(position).getTime());
+        typeView.setText(getItem(position).getType());
         idView.setText("ID: " +getItem(position).getId());
         if (getItem(position).getNewUse() == 1) {
             //dateView.setTypeface(null, Typeface.BOLD);

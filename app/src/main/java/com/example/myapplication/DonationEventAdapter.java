@@ -47,6 +47,7 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
         ImageView imageView = convertView.findViewById(R.id.imageView2);
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
         TextView dateView = convertView.findViewById(R.id.txtDate);
+        TextView timeView = convertView.findViewById(R.id.txtTime);
         TextView idView = convertView.findViewById(R.id.txtId);
         TextView typeView = convertView.findViewById(R.id.txtType);
 
@@ -60,16 +61,17 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             }
         });
 
-        dateView.setText(getItem(position).getDateTime());
+        dateView.setText(getItem(position).getDate());
+        timeView.setText(getItem(position).getTime());
         idView.setText(getItem(position).getId());
         typeView.setText(getItem(position).getType());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(getItem(position).getDateTime(), formatter);
-        String formattedDate = dateTime.format(formatter);
-
-        dateView.setText(formattedDate);
-        typeView.setText("Type: " +getItem(position).getType());
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse(getItem(position).getDateTime(), formatter);
+//        String formattedDate = dateTime.format(formatter);
+//
+//        dateView.setText(formattedDate);
+        typeView.setText(getItem(position).getType());
         idView.setText("ID: " +getItem(position).getId());
 
         if (getItem(position).getType().equals("pants")) {

@@ -48,6 +48,31 @@ public class Event {
         return dateTime;
     }
 
+    public String getDate() {
+        String date;
+        String parsing_dateTime = this.dateTime;
+
+        // Split the dateTime string based on space and take the first part
+        date = parsing_dateTime.split(" ")[0];
+
+        return date;
+    }
+
+    public String getTime() {
+        String time;
+        String parsing_dateTime = this.dateTime;
+
+        // Split the dateTime string based on space and take the second part
+        String[] dateTimeParts = parsing_dateTime.split(" ");
+        String timePart = dateTimeParts[1];
+
+        // Further split the timePart based on colon to get the time
+        String[] timeParts = timePart.split(":");
+        time = timeParts[0] + ":" + timeParts[1] + ":" + timeParts[2];
+
+        return time;
+    }
+
     public int getStatus(){
         return status;
     }

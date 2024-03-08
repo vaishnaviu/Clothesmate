@@ -24,39 +24,26 @@
             android:layout_height="72dp" />
 
         <TextView
-            android:id="@+id/txtId"
+            android:id="@+id/txtType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/imageView2"
-            android:text="Id"
+            android:text="Type"
             android:textSize="16sp"
             android:fontFamily='sans-serif-medium'
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/txtType"
+            android:id="@+id/txtId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtId"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@+id/imageView2"
-            android:text="Type"
-            android:textSize="12sp"
-            android:fontFamily='sans-serif'
-            android:textColor="@color/gray"/>
-
-        <TextView
-            android:id="@+id/txtColor"
-            android:text="Color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageView2"
             android:layout_below="@id/txtType"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:text="Id"
             android:textSize="12sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>
