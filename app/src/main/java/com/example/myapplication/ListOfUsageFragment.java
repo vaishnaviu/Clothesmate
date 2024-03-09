@@ -31,7 +31,7 @@ import java.util.List;
 public class ListOfUsageFragment extends Fragment {
     private ListView listView;
 
-    private TextView dateView, idView;
+    private TextView noYearDateView, idView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +47,7 @@ public class ListOfUsageFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = getView().findViewById(R.id.listview2);
-        dateView = getView().findViewById(R.id.txtDate);
+        noYearDateView = getView().findViewById(R.id.txtNoYearDate);
         idView = getView().findViewById(R.id.txtId);
 
         final ArrayList<Event> list = new ArrayList();

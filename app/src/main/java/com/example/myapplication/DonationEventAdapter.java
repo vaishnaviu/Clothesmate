@@ -46,8 +46,8 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
 
         ImageView imageView = convertView.findViewById(R.id.imageView2);
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
-        TextView dateView = convertView.findViewById(R.id.txtDate);
-        TextView timeView = convertView.findViewById(R.id.txtTime);
+        TextView noYearDateView = convertView.findViewById(R.id.txtNoYearDate);
+        TextView yearView = convertView.findViewById(R.id.txtYear);
         TextView idView = convertView.findViewById(R.id.txtId);
         TextView typeView = convertView.findViewById(R.id.txtType);
 
@@ -61,8 +61,8 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             }
         });
 
-        dateView.setText(getItem(position).getDate());
-        timeView.setText(getItem(position).getTime());
+        noYearDateView.setText(getItem(position).getNoYearDate());
+        yearView.setText(getItem(position).getYear());
         idView.setText(getItem(position).getId());
         typeView.setText(getItem(position).getType());
 

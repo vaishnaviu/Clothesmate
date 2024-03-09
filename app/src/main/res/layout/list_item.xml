@@ -63,7 +63,7 @@
             android:layout_width="0.5dp"
             android:layout_height="72dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="100dp"
+            android:layout_marginRight="80dp"
             android:background="@color/button_gray"/>
 
         <TextView
@@ -73,8 +73,21 @@
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last used"
+            android:text="Used"
             android:textSize="12sp"
+            android:fontFamily='sans-serif-medium'
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtNoYearDate"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/txtUsed"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16sp"
             android:fontFamily='sans-serif-medium'
             android:textColor="@color/black"/>
 
@@ -82,24 +95,11 @@
             android:id="@+id/txtTime"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:layout_below="@+id/txtUsed"
+            android:layout_below="@+id/txtNoYearDate"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time"
-            android:textSize="16sp"
-            android:fontFamily='sans-serif-medium'
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/txtTime"
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
             android:textSize="10sp"
             android:fontFamily='sans-serif'
             android:textColor="@color/gray"/>

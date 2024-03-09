@@ -58,6 +58,22 @@ public class Event {
         return date;
     }
 
+    public String getNoYearDate() {
+        String date = getDate();
+        String[] dateParts = date.split("-");
+        String noYearDate = dateParts[1] + "/" + dateParts[2];
+
+        return noYearDate;
+    }
+
+    public String getYear() {
+        String date = getDate();
+        String[] dateParts = date.split("-");
+        String year = dateParts[0];
+
+        return year;
+    }
+
     public String getTime() {
         String time;
         String parsing_dateTime = this.dateTime;
