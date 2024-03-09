@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import java.util.Set;
 public class StylingFragment extends Fragment {
 
     private ListView listView;
+    private TextView suggestionsTextView;
     private AutoCompleteTextView weatherAutoCompleteTextView, occasionAutoCompleteTextView;
     private DatabaseReference databaseReference;
     private Map<String, Map<String, Object>> inventory;
@@ -45,6 +47,7 @@ public class StylingFragment extends Fragment {
         listView = view.findViewById(R.id.listview);
         weatherAutoCompleteTextView = view.findViewById(R.id.auto_complete_weathertxt);
         occasionAutoCompleteTextView = view.findViewById(R.id.auto_complete_occasiontxt);
+        suggestionsTextView = view.findViewById(R.id.suggestions);
 
         Button btnSuggestStyle = view.findViewById(R.id.btnSuggestStyle);
         btnSuggestStyle.setOnClickListener(v -> {
@@ -54,6 +57,7 @@ public class StylingFragment extends Fragment {
             System.out.println("Selected weather and occasion: " + selectedWeather + " " + selectedOccasion);
 
             if (!selectedWeather.isEmpty() && !selectedOccasion.isEmpty()) {
+                suggestionsTextView.setVisibility(View.VISIBLE);
                 generateStylingSuggestions(selectedWeather, selectedOccasion);
             } else {
                 showToast("Please select both weather and occasion.");
@@ -86,7 +90,7 @@ public class StylingFragment extends Fragment {
             StylingAdapter adapter = new StylingAdapter(requireContext(), R.layout.item_styling, uniqueItemsList);
             listView.setAdapter(adapter);
         } else {
-            showToast("No unique items found for the selected weather and occasion.");
+            showToast("No styling suggestions found for the selected weather and occasion.");
         }
     }
 

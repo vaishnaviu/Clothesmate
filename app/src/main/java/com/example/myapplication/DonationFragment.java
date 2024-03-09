@@ -75,9 +75,19 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime timestamp = LocalDateTime.parse(timestampString, formatter);
 
-                    String idString = snapshot1.child("id").getValue().toString();
+
+//                    String idString = snapshot1.child("id").getValue().toString();
+                    String idString = "";
+                    if (snapshot1.child("id").getValue()!=null){
+                        idString = snapshot1.child("id").getValue().toString();
+                    }
+                    else{
+                        System.out.println("NULL idString");
+                    }
+
                     latestTimestamps.put(idString, timestamp);
                 }
+                System.out.println("latest Time stamps:" + latestTimestamps);
 
                 LocalDateTime currentTime = LocalDateTime.now();
                 LocalDateTime twelveMonthsAgo = currentTime.minus(12, ChronoUnit.MONTHS);
@@ -153,31 +163,40 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
     private void donateSelectedItems() {
         Iterator<Event> iterator = donationList.iterator();
 
-        System.out.println("Donation List: " + donationList);
-
         while (iterator.hasNext()) {
             Event event = iterator.next();
 
             if (event.getStatus() == 1) {
-                String timestamp = event.getDateTime();
                 String itemId = event.getId();
 
-                System.out.println("Timestamp, itemID: "+timestamp + " "+itemId);
+                // Query the "ourtest" collection for all branches with the selected ID
+                DatabaseReference ourtestRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
+                ourtestRef.orderByChild("id").equalTo(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String timestamp = snapshot.getKey();
 
-                // Update the status in the donation reference using the timestamp as the key
-                DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("ourtest").child(timestamp);
-                eventRef.child("status").setValue(0);
+                            // Update the status in the "ourtest" reference using the timestamp as the key
+                            DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("ourtest").child(timestamp);
+                            eventRef.child("status").setValue(0);
+                        }
+                        // Update the status in the inventory reference
+                        inventoryRef.child(itemId).child("status").setValue(0);
 
-                // Update the status in the inventory reference
-                inventoryRef.child(itemId).child("status").setValue(0);
+                        // Remove the donated item from the list
+                        iterator.remove();
 
-                // Remove the donated item from the list
-                iterator.remove();
+                        // Notify the adapter about the changes
+                        donationEventAdapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle error
+                    }
+                });
             }
         }
-
-        // Notify the adapter about the changes
-        donationEventAdapter.notifyDataSetChanged();
 
         Toast.makeText(getActivity(), "Selected items donated!", Toast.LENGTH_SHORT).show();
     }

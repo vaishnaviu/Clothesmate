@@ -97,18 +97,6 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             onCheckBoxStateChanged(currentEvent, isChecked);
         });
 
-        /*if (getItem(position).getType().equals("pants")) {
-            imageView.setImageResource(R.drawable.image_pants);
-        } else if (getItem(position).getType().equals("dress")) {
-            imageView.setImageResource(R.drawable.image_dress);
-        } else if (getItem(position).getType().equals("shirt")) {
-            imageView.setImageResource(R.drawable.image_shirt);
-        } else if (getItem(position).getType().equals("shoes")) {
-            imageView.setImageResource(R.drawable.image_shoes);
-        } else {
-            imageView.setImageResource(R.drawable.image_no_style);
-        }*/
-
         return convertView;
     }
 }
