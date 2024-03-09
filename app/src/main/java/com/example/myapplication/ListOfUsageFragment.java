@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class ListOfUsageFragment extends Fragment {
     private ListView listView;
@@ -47,15 +50,12 @@ public class ListOfUsageFragment extends Fragment {
         dateView = getView().findViewById(R.id.txtDate);
         idView = getView().findViewById(R.id.txtId);
 
-
-
         final ArrayList<Event> list = new ArrayList();
         EventAdapter eventAdapter = new EventAdapter(getActivity(), R.layout.list_item, list);
         listView.setAdapter(eventAdapter);
 
         HashMap<String,String> typeIdMap = new HashMap<>();
 
-        //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("ourtest");
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Inventory");
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
         reference1.addValueEventListener(new ValueEventListener() {
@@ -77,40 +77,41 @@ public class ListOfUsageFragment extends Fragment {
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                //System.out.println("test1");
-                System.out.println(snapshot.getChildren());
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    //Information info = snapshot1.getValue(Information.class);
-                    //String txt = "Id:"+info.getId()+"Freq:"+info.getFrequency();
-                    //String IdString = snapshot1.child("Id").getValue().toString();
-                    //String DateString = snapshot1.child("Occasion").getValue().toString();
-                    //String txt = " Object:" + snapshot1.getKey() + " Id:" + IdString + " Occasion:" + DateString;
-                    String dateString = snapshot1.getKey();
+                List<String> latestTimestamps = new ArrayList<>();
+                for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                    latestTimestamps.add(snapshot1.getKey());
+                }
 
+                Collections.sort(latestTimestamps, Collections.reverseOrder()); //sort keys in reverse order
+
+                list.clear(); // clear current list before repopulating
+
+                for(String timestamp : latestTimestamps){
                     String idString = "";
-                    if (snapshot1.child("id").getValue() != null) {
-                        idString = snapshot1.child("id").getValue().toString();
+                    DataSnapshot dateObj = snapshot.child(timestamp);
+                    String dateString = timestamp;
+
+                    if (dateObj.child("id").getValue() != null) {
+                        idString = dateObj.child("id").getValue().toString();
                     } else {
                         System.out.println("null idString");
                     }
-                    //String idString = snapshot1.child("id").getValue().toString();
-                    System.out.println("id test"+idString+"date"+dateString);
+
                     int newUse=0;
-                    if(snapshot1.child("newUse").getValue()!=null){
-                        newUse = snapshot1.child("newUse").getValue(Integer.class);
+                    if(dateObj.child("newUse").getValue()!=null){
+                        newUse = dateObj.child("newUse").getValue(Integer.class);
                     }else{
                         System.out.println("null newUse");
                     }
 
                     String typeString = typeIdMap.get(idString);
-                    Event newEvent = new Event(idString,dateString, newUse, typeString);
+                    Event newEvent = new Event(idString, dateString, newUse, typeString);
                     newEvent.setType(typeString);
                     int status;
                     System.out.println("Event type:" + typeString);
                     //String txt = "Date:" + DateString + "\nId:"+IdString;
-                    if(snapshot1.child("status").getValue()!=null){
-                        status = ((Long) snapshot1.child("status").getValue()).intValue();
+                    if(dateObj.child("status").getValue()!=null){
+                        status = ((Long) dateObj.child("status").getValue()).intValue();
                         if(status==1){
                             list.add(newEvent);
                         }
@@ -120,7 +121,6 @@ public class ListOfUsageFragment extends Fragment {
                 }
                 eventAdapter.notifyDataSetChanged();
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

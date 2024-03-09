@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.graphics.Typeface;
 
 import androidx.annotation.NonNull;
 
@@ -47,9 +46,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
         typeView.setText(getItem(position).getType());
         idView.setText("ID: " +getItem(position).getId());
         if (getItem(position).getNewUse() == 1) {
-            //dateView.setTypeface(null, Typeface.BOLD);
-
-
             imageViewDot.setImageResource(R.drawable.ic_new);
         }
 
