@@ -48,7 +48,7 @@ public class ListOfClothesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_of_clothes, container, false);
         Toolbar toolbar = view.findViewById(R.id.new_toolbar);
-        toolbar.setTitle("My Clothes");
+        toolbar.setTitle("My Closet");
         return view;
     }
     @SuppressLint("MissingInflatedId")
