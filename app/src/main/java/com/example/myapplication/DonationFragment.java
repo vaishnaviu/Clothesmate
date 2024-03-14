@@ -169,6 +169,9 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
             if (event.getStatus() == 1) {
                 String itemId = event.getId();
 
+                // Update the status in the inventory reference
+                inventoryRef.child(itemId).child("status").setValue(0);
+
                 // Query the "ourtest" collection for all branches with the selected ID
                 DatabaseReference ourtestRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
                 ourtestRef.orderByChild("id").equalTo(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -180,13 +183,10 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                             // Update the status in the "ourtest" reference using the timestamp as the key
                             DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("ourtest").child(timestamp);
                             eventRef.child("status").setValue(0);
+                            donationEventAdapter.notifyDataSetChanged();
                         }
-                        // Update the status in the inventory reference
-                        inventoryRef.child(itemId).child("status").setValue(0);
-
                         // Remove the donated item from the list
                         iterator.remove();
-
                         // Notify the adapter about the changes
                         donationEventAdapter.notifyDataSetChanged();
                     }
@@ -198,7 +198,7 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
             }
         }
 
-        Toast.makeText(getActivity(), "Selected items donated!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Selected items to be donated!", Toast.LENGTH_SHORT).show();
     }
 
     private void selectAllCheckboxes(boolean isSelected) {

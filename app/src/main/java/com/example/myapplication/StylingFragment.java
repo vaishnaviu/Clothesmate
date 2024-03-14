@@ -98,12 +98,13 @@ public class StylingFragment extends Fragment {
         List<Map<String, Object>> uniqueItemsList = new ArrayList<>();
         Set<String> uniqueItemSet = new HashSet<>();
 
+        // Calculate type frequency
+        Map<String, Integer> typeFrequency = calculateTypeFrequency(items);
+
         for (Map<String, Object> item : items) {
             String itemId = item.get("Id") != null ? item.get("Id").toString() : "";
             String type = item.get("Type") != null ? item.get("Type").toString() : "";
-            String color = item.get("Color") != null ? item.get("Color").toString() : "";
-
-            String uniqueKey = itemId + type + color;
+            String uniqueKey = itemId + type;
 
             if (!uniqueItemSet.contains(uniqueKey)) {
                 uniqueItemSet.add(uniqueKey);
@@ -111,8 +112,24 @@ public class StylingFragment extends Fragment {
             }
         }
 
+        // Sort uniqueItemsList based on type frequency in descending order
+        uniqueItemsList.sort((item1, item2) -> {
+            String type1 = item1.get("Type").toString();
+            String type2 = item2.get("Type").toString();
+            int frequency1 = typeFrequency.getOrDefault(type1, 0);
+            int frequency2 = typeFrequency.getOrDefault(type2, 0);
+
+            // Compare frequencies in descending order
+            return Integer.compare(frequency2, frequency1);
+        });
+
+        System.out.println("Suggestions: " + uniqueItemsList);
+
         return uniqueItemsList;
     }
+
+
+
 
     private Map<String, Integer> calculateTypeFrequency(List<Map<String, Object>> items) {
         Map<String, Integer> typeFrequency = new HashMap<>();
@@ -120,67 +137,8 @@ public class StylingFragment extends Fragment {
             String type = item.get("Type").toString();
             typeFrequency.put(type, typeFrequency.getOrDefault(type, 0) + 1);
         }
+        System.out.println("Type and frequency:" + typeFrequency);
         return typeFrequency;
-    }
-
-    private String getMostFrequentType(Map<String, Integer> typeFrequency) {
-        int maxFrequency = 0;
-        String mostFrequentType = null;
-        for (Map.Entry<String, Integer> entry : typeFrequency.entrySet()) {
-            if (entry.getValue() > maxFrequency) {
-                maxFrequency = entry.getValue();
-                mostFrequentType = entry.getKey();
-            }
-        }
-        return mostFrequentType;
-    }
-
-    private List<Map<String, Object>> getSuggestedItemsForType(String type, List<Map<String, Object>> items) {
-        List<Map<String, Object>> suggestedItems = new ArrayList<>();
-
-        // Filter items based on the specified type
-        for (Map<String, Object> item : items) {
-            String itemTypeId = item.get("Type").toString();
-            if (itemTypeId.equals(type)) {
-                suggestedItems.add(item);
-            }
-        }
-
-        // Sort items by frequency (descending order)
-        suggestedItems.sort((item1, item2) -> {
-            int frequency1 = calculateItemFrequency(type, items);
-            int frequency2 = calculateItemFrequency(type, items);
-            return Integer.compare(frequency2, frequency1);
-        });
-
-        return suggestedItems;
-    }
-
-    private int calculateItemFrequency(String type, List<Map<String, Object>> items) {
-        int frequency = 0;
-        for (Map<String, Object> item : items) {
-            String itemTypeId = item.get("Type").toString();
-            if (itemTypeId.equals(type)) {
-                frequency++;
-            }
-        }
-        return frequency;
-    }
-
-    private ArrayList<Map<String, Object>> createItemListFromItems(List<Map<String, Object>> items) {
-        ArrayList<Map<String, Object>> itemList = new ArrayList<>();
-        for (Map<String, Object> item : items) {
-            Map<String, Object> itemDetails = new HashMap<>();
-            String itemId = item.get("Id").toString();
-            String type = item.get("Type").toString();
-            String color = item.get("Color").toString();
-
-            itemDetails.put("Id", itemId);
-            itemDetails.put("Type", type);
-            itemDetails.put("Color", color);
-            itemList.add(itemDetails);
-        }
-        return itemList;
     }
 
     private List<Map<String, Object>> filterInventoryByWeatherOccasion(String weather, String occasion) {
@@ -206,7 +164,7 @@ public class StylingFragment extends Fragment {
                     Map<String, Object> filteredItem = new HashMap<>();
                     filteredItem.put("Id", itemId);
                     filteredItem.put("Type", inventoryItem.get("Type"));
-                    filteredItem.put("Color", inventoryItem.get("Color"));
+//                    filteredItem.put("Color", inventoryItem.get("Color"));
                     filteredItems.add(filteredItem);
                 }
             }

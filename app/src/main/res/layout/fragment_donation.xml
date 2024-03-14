@@ -105,7 +105,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="sans-serif-medium"
             android:textSize="16sp"
-            android:text="Donate"
+            android:text="Donating these!"
             android:layout_gravity="center_vertical"/>
     </FrameLayout>
 
