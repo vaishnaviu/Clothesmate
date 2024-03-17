@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,9 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
     private List<Event> donationList;
     private DatabaseReference inventoryRef;
     private DatabaseReference donationRef;
+    Map<String, LocalDateTime> latestTimestamps = new HashMap<>();
+    private List<String> donationTimestampsAndIds = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,26 +70,26 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
         donationRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
 
         donationRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Map<String, LocalDateTime> latestTimestamps = new HashMap<>();
-
+                latestTimestamps.clear();
+                donationTimestampsAndIds.clear();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String timestampString = snapshot1.getKey();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime timestamp = LocalDateTime.parse(timestampString, formatter);
 
-
-//                    String idString = snapshot1.child("id").getValue().toString();
                     String idString = "";
+
                     if (snapshot1.child("id").getValue()!=null){
                         idString = snapshot1.child("id").getValue().toString();
                     }
                     else{
                         System.out.println("NULL idString");
                     }
-
                     latestTimestamps.put(idString, timestamp);
+                    donationTimestampsAndIds.add(timestampString + "_" + idString);
                 }
                 System.out.println("latest Time stamps:" + latestTimestamps);
 
@@ -102,7 +106,7 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                     String formattedTimestamp = latestTimestamp.format(formatter);
 
                     if (latestTimestamp.isBefore(twelveMonthsAgo)) {
-                        inventoryRef.child(idString).addListenerForSingleValueEvent(new ValueEventListener() {
+                        inventoryRef.child(idString).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists() && snapshot.child("status").getValue(Integer.class) == 1) {
@@ -128,7 +132,6 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
             }
         });
 
-
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,68 +145,59 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                 selectAllCheckboxes(false);
             }
         });
+
         btnDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (anyCheckboxSelected()) {
-                    donateSelectedItems();
+                    for (Event event : donationList) {
+                        if (event.isSelected()) {
+                            String itemId = event.getId();
+                            // Update the status in the inventory reference
+                            inventoryRef.child(itemId).child("status").setValue(0);
+                            for (String entry : donationTimestampsAndIds) {
+                                // Split each entry into timestamp and ID
+                                String[] parts = entry.split("_");
+                                if (parts.length == 2) {
+                                    String dateString = parts[0];
+                                    String idString = parts[1];
+                                    if (idString.equals(itemId)) {
+                                        // Update status to 0 for the matched ID and timestamp
+                                        System.out.println("Updating status to 0 for: " + itemId + " " + dateString);
+                                        FirebaseDatabase.getInstance().getReference()
+                                                .child("ourtest")
+                                                .child(dateString)
+                                                .child("status")
+                                                .setValue(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Notify the adapter after donation
+                    donationEventAdapter.notifyDataSetChanged();
+                    Toast.makeText(getActivity(), "Selected items have been donated!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select at least one item to donate.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
     @Override
     public void onCheckBoxChanged(Event event, boolean isChecked) {
         event.setStatus(isChecked ? 1 : 0);
+        event.setSelected(isChecked);
         donationEventAdapter.notifyDataSetChanged();
     }
 
-    private void donateSelectedItems() {
-        Iterator<Event> iterator = donationList.iterator();
-
-        while (iterator.hasNext()) {
-            Event event = iterator.next();
-
-            if (event.getStatus() == 1) {
-                String itemId = event.getId();
-
-                // Update the status in the inventory reference
-                inventoryRef.child(itemId).child("status").setValue(0);
-
-                // Query the "ourtest" collection for all branches with the selected ID
-                DatabaseReference ourtestRef = FirebaseDatabase.getInstance().getReference().child("ourtest");
-                ourtestRef.orderByChild("id").equalTo(itemId).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String timestamp = snapshot.getKey();
-
-                            // Update the status in the "ourtest" reference using the timestamp as the key
-                            DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("ourtest").child(timestamp);
-                            eventRef.child("status").setValue(0);
-                            donationEventAdapter.notifyDataSetChanged();
-                        }
-                        // Remove the donated item from the list
-                        iterator.remove();
-                        // Notify the adapter about the changes
-                        donationEventAdapter.notifyDataSetChanged();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle error
-                    }
-                });
-            }
-        }
-
-        Toast.makeText(getActivity(), "Selected items to be donated!", Toast.LENGTH_SHORT).show();
-    }
 
     private void selectAllCheckboxes(boolean isSelected) {
         for (Event event : donationList) {
             event.setStatus(isSelected ? 1 : 0);
+            event.setSelected(isSelected);
         }
         donationEventAdapter.notifyDataSetChanged();
     }
