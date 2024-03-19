@@ -35,7 +35,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView typeView = convertView.findViewById(R.id.txtType);
         TextView idView = convertView.findViewById(R.id.txtId);
 
-        //need to add an if statement to change the text
         noYearDateView.setText(getItem(position).getNoYearDate());
         timeView.setText(getItem(position).getTime());
         typeView.setText(getItem(position).getType());

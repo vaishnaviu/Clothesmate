@@ -109,7 +109,6 @@ public class ListOfUsageFragment extends Fragment {
                     newEvent.setType(typeString);
                     int status;
                     System.out.println("Event type:" + typeString);
-                    //String txt = "Date:" + DateString + "\nId:"+IdString;
                     if(dateObj.child("status").getValue()!=null){
                         status = ((Long) dateObj.child("status").getValue()).intValue();
                         if(status==1){
@@ -135,8 +134,6 @@ public class ListOfUsageFragment extends Fragment {
                  Event usageEvent = list.get(i);
                  usageEvent.setNewUseFalse();
                  FirebaseDatabase.getInstance().getReference().child("ourtest").child(usageEvent.getDateTime()).child("newUse").setValue(0);
-
-
 
                  Intent intent = new Intent(getActivity(),UsageDetail.class);
                  intent.putExtra("DateTime",usageEvent.getDateTime());
