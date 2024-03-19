@@ -1,26 +1,13 @@
 package com.example.myapplication;
 
 public class Event {
-    private String dateTime;
-    private String id;
-    private int status;
-    private int newUse;
 
-    private String color;
-
-
-    private String type;
-
-    private String weather;
-    private String occasion;
-
+    private int status, newUse;
+    private String dateTime, id, color,type, weather, occasion;
     private boolean isSelected;
 
-
     public Event(){
-
     }
-
     public Event(String dateTime){
         this.dateTime = dateTime;
     }
@@ -37,8 +24,6 @@ public class Event {
         this.dateTime = dateTime;
         this.type = type;
     }
-
-
 
     public String getId(){
         return id;

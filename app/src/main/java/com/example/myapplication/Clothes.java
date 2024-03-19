@@ -2,11 +2,8 @@ package com.example.myapplication;
 
 public class Clothes {
 
-    private String id;
+    private String id, type;
     private int status;
-
-    private String type;
-    private String imageUrl;
 
     public Clothes(String id, String type) {
 
@@ -38,11 +35,4 @@ public class Clothes {
         this.type = type;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

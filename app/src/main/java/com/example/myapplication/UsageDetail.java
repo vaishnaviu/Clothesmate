@@ -83,8 +83,6 @@ public class UsageDetail extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 userWeatherInput = adapterView.getItemAtPosition(i).toString();
-
-
             }
         });
 
@@ -92,8 +90,6 @@ public class UsageDetail extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 userOccasionInput = adapterView.getItemAtPosition(i).toString();
-
-
             }
         });
 

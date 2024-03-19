@@ -28,8 +28,6 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
 
     }
 
-
-
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         convertView = layoutInflater.inflate(mResource,parent,false);
@@ -38,7 +36,6 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
         ImageView imageViewDelete = convertView.findViewById(R.id.imageViewDelete);
         TextView typeView = convertView.findViewById(R.id.txtTypeClothes);
         TextView idView = convertView.findViewById(R.id.txtIdClothes);
-        //imageView.setImageResource(getItem(position).getImage());
         imageViewDelete.setImageResource(R.drawable.ic_delete);
 
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("ourtest");
@@ -52,7 +49,6 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
                 reference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //eventList.clear();
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             String dateString = snapshot1.getKey();
                             int status = ((Long) snapshot1.child("status").getValue()).intValue();
@@ -61,7 +57,7 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
                                 FirebaseDatabase.getInstance().getReference().child("ourtest").child(dateString).child("status").setValue(0);
                             }
                         }
-                        reference2.removeEventListener(this);//without this, once a delete icon is clicked, I was not able to reset associated event status back to 1.
+                        reference2.removeEventListener(this);//Without this, once a delete icon is clicked, associated event status won't reset back to 1.
 
                     }
 
