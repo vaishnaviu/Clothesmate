@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/new_toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar" />
 
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +34,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/DateTimeDetailTitle"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="30dp"
                 android:text="Date"
                 android:textColor="@color/black"
-                android:fontFamily="sans-serif-medium"/>
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:id="@+id/DateTimeDetail"
@@ -56,7 +56,7 @@
                 android:textColor="@color/gray"
                 android:fontFamily="sans-serif"
                 android:layout_alignParentRight="true"
-                android:gravity="right"/>
+                android:gravity="right" />
 
             <TextView
                 android:id="@+id/IdDetailTitle"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="16dp"
                 android:text="ID"
                 android:textColor="@color/black"
-                android:fontFamily="sans-serif-medium"/>
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:id="@+id/IdDetail"
@@ -78,7 +78,7 @@
                 android:textColor="@color/gray"
                 android:fontFamily="sans-serif"
                 android:layout_alignParentRight="true"
-                android:gravity="right"/>
+                android:gravity="right" />
 
             <TextView
                 android:id="@+id/WeatherDetailTitle"
@@ -88,7 +88,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Weather"
                 android:textColor="@color/black"
-                android:fontFamily="sans-serif-medium"/>
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:id="@+id/WeatherDetail"
@@ -100,7 +100,7 @@
                 android:textColor="@color/gray"
                 android:fontFamily="sans-serif"
                 android:layout_alignParentRight="true"
-                android:gravity="right"/>
+                android:gravity="right" />
 
             <TextView
                 android:id="@+id/OccasionDetailTitle"
@@ -110,7 +110,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Occasion"
                 android:textColor="@color/black"
-                android:fontFamily="sans-serif-medium"/>
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:id="@+id/OccasionDetail"
@@ -122,19 +122,16 @@
                 android:textColor="@color/gray"
                 android:fontFamily="sans-serif"
                 android:layout_alignParentRight="true"
-                android:gravity="right"/>
-
+                android:gravity="right" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Weather"
-        android:fontFamily="sans-serif-medium"/>
+        android:fontFamily="sans-serif-medium" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -160,9 +157,7 @@
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:inputType="none"
-            android:popupBackground="@drawable/custom_dropdown_item_background"
-            />
-
+            android:popupBackground="@drawable/custom_dropdown_item_background" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -170,7 +165,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Occasion"
-        android:fontFamily="sans-serif-medium"/>
+        android:fontFamily="sans-serif-medium" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -196,8 +191,7 @@
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:inputType="none"
-            android:popupBackground="@drawable/custom_dropdown_item_background"/>
-
+            android:popupBackground="@drawable/custom_dropdown_item_background" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
@@ -229,7 +223,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:textSize="16sp"
                 android:text="Save Changes"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" />
         </FrameLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -6,14 +6,13 @@
         <item name="colorPrimaryVariant">@color/turquoise</item>
         <item name="android:statusBarColor">@color/light_gray</item>
         <item name="android:windowLightStatusBar">true</item>
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/transparent</item>
     </style>
 
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication"/>
+    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">32sp</item>

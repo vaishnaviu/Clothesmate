@@ -60,6 +60,8 @@ public class Event {
 
     public String getNoYearDate() {
         String date = getDate();
+
+        // Split the date string and get the date without year
         String[] dateParts = date.split("-");
         String noYearDate = dateParts[1] + "/" + dateParts[2];
 
@@ -68,6 +70,8 @@ public class Event {
 
     public String getYear() {
         String date = getDate();
+
+        // Split the date string and get the year
         String[] dateParts = date.split("-");
         String year = dateParts[0];
 

@@ -65,13 +65,6 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
         yearView.setText(getItem(position).getYear());
         idView.setText(getItem(position).getId());
         typeView.setText(getItem(position).getType());
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime dateTime = LocalDateTime.parse(getItem(position).getDateTime(), formatter);
-//        String formattedDate = dateTime.format(formatter);
-//
-//        dateView.setText(formattedDate);
-        typeView.setText(getItem(position).getType());
         idView.setText("ID: " +getItem(position).getId());
 
         if (getItem(position).getType().equals("pants")) {

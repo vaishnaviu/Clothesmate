@@ -30,7 +30,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:text="Weather"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="sans-serif-medium" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -58,7 +58,6 @@
                 android:inputType="none"
                 android:popupBackground="@drawable/custom_dropdown_item_background"
                 android:contentDescription="@string/weather_auto_complete_description" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -66,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="Occasion"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="sans-serif-medium" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -98,7 +97,6 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-
     <Button
         android:id="@+id/btnSuggestStyle"
         android:layout_width="match_parent"
@@ -110,7 +108,7 @@
         android:fontFamily="sans-serif-medium"
         android:textSize="16sp"
         android:text="Generate Styling Suggestions"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -123,7 +121,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-medium"
         android:textSize="14sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ListView
         android:id="@+id/listview"
@@ -138,6 +136,5 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="80dp"
         android:divider="@null"
-        android:dividerHeight="20dp"/>
-
+        android:dividerHeight="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

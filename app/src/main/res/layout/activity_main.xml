@@ -10,7 +10,7 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_gray"/>
+        android:background="@color/light_gray" />
 
         <View
             android:id="@+id/divider_line"
@@ -18,7 +18,7 @@
             android:layout_height="0.5dp"
             android:background="@color/line_gray"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="80dp"/>
+            android:layout_marginBottom="80dp" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -29,17 +29,16 @@
             app:fabCradleMargin="10dp"
             app:fabCradleRoundedCornerRadius="50dp">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:background="@android:color/transparent"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@drawable/mycloset_selector"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_menu"
-            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"/>
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                app:itemIconTint="@color/black"
+                app:itemTextColor="@drawable/mycloset_selector"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_menu"
+                app:itemActiveIndicatorStyle="@style/App.Custom.Indicator" />
+        </com.google.android.material.bottomappbar.BottomAppBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
