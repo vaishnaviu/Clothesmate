@@ -40,7 +40,6 @@ public class ClothesAdapter extends ArrayAdapter<Clothes> {
             public void onClick(View view) {
                 String clothesIdString = getItem(position).getId();
                 FirebaseDatabase.getInstance().getReference().child("Inventory").child(clothesIdString).child("status").setValue(0);
-                //ArrayList<Event> eventList = new ArrayList<>();
                 reference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

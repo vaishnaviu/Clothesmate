@@ -50,10 +50,7 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
         TextView yearView = convertView.findViewById(R.id.txtYear);
         TextView idView = convertView.findViewById(R.id.txtId);
         TextView typeView = convertView.findViewById(R.id.txtType);
-
-
         checkBox.setChecked(getItem(position).isSelected());
-
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,10 +74,8 @@ public class DonationEventAdapter extends ArrayAdapter<Event> {
             imageView.setImageResource(R.drawable.image_shoes);
         } else if (getItem(position).getType().equals("jacket")) {
             imageView.setImageResource(R.drawable.image_jacket);
-        }
-        else {
+        } else {
             imageView.setImageResource(R.drawable.image_no_style);
-
         }
 
         Event currentEvent = getItem(position);

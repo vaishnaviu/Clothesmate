@@ -79,9 +79,7 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                     String timestampString = snapshot1.getKey();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime timestamp = LocalDateTime.parse(timestampString, formatter);
-
                     String idString = "";
-
                     if (snapshot1.child("id").getValue()!=null){
                         idString = snapshot1.child("id").getValue().toString();
                     }
@@ -92,11 +90,9 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                     donationTimestampsAndIds.add(timestampString + "_" + idString);
                 }
                 System.out.println("latest Time stamps:" + latestTimestamps);
-
                 LocalDateTime currentTime = LocalDateTime.now();
                 LocalDateTime twelveMonthsAgo = currentTime.minus(12, ChronoUnit.MONTHS);
-
-                donationList.clear(); // Clear the list before repopulating
+                donationList.clear();
 
                 for (Map.Entry<String, LocalDateTime> entry : latestTimestamps.entrySet()) {
                     String idString = entry.getKey();
@@ -118,7 +114,6 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-                                // Handle error
                             }
                         });
                     }
@@ -128,7 +123,6 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
             }
         });
 
@@ -153,29 +147,21 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
                     for (Event event : donationList) {
                         if (event.isSelected()) {
                             String itemId = event.getId();
-                            // Update the status in the inventory reference
+
                             inventoryRef.child(itemId).child("status").setValue(0);
                             for (String entry : donationTimestampsAndIds) {
-                                // Split each entry into timestamp and ID
                                 String[] parts = entry.split("_");
                                 if (parts.length == 2) {
                                     String dateString = parts[0];
                                     String idString = parts[1];
                                     if (idString.equals(itemId)) {
-                                        // Update status to 0 for the matched ID and timestamp
                                         System.out.println("Updating status to 0 for: " + itemId + " " + dateString);
-                                        FirebaseDatabase.getInstance().getReference()
-                                                .child("ourtest")
-                                                .child(dateString)
-                                                .child("status")
-                                                .setValue(0);
+                                        FirebaseDatabase.getInstance().getReference().child("ourtest").child(dateString).child("status").setValue(0);
                                     }
                                 }
                             }
                         }
                     }
-
-                    // Notify the adapter after donation
                     donationEventAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity(), "Selected items have been donated!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -193,7 +179,6 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
         donationEventAdapter.notifyDataSetChanged();
     }
 
-
     private void selectAllCheckboxes(boolean isSelected) {
         for (Event event : donationList) {
             event.setStatus(isSelected ? 1 : 0);
@@ -205,9 +190,9 @@ public class DonationFragment extends Fragment implements DonationEventAdapter.C
     private boolean anyCheckboxSelected() {
         for (Event event : donationList) {
             if (event.getStatus() == 1) {
-                return true; // At least one checkbox is selected
+                return true;
             }
         }
-        return false; // No checkbox is selected
+        return false;
     }
 }

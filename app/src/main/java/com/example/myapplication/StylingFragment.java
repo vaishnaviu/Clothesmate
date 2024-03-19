@@ -64,17 +64,13 @@ public class StylingFragment extends Fragment {
             }
         });
 
-        // Set up AutoCompleteTextView adapters for weather and occasion
         ArrayAdapter<String> weatherAdapter = new ArrayAdapter<>(requireContext(), R.layout.styling_dropdown, getWeatherOptions());
         weatherAutoCompleteTextView.setAdapter(weatherAdapter);
 
         ArrayAdapter<String> occasionAdapter = new ArrayAdapter<>(requireContext(), R.layout.styling_dropdown, getOccasionOptions());
         occasionAutoCompleteTextView.setAdapter(occasionAdapter);
-
-        // Get a reference to the Firebase database
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        // Load inventory and usage data from Firebase
         loadDataFromFirebase();
         return view;
     }
@@ -97,8 +93,6 @@ public class StylingFragment extends Fragment {
     private List<Map<String, Object>> createUniqueItemsList(List<Map<String, Object>> items) {
         List<Map<String, Object>> uniqueItemsList = new ArrayList<>();
         Set<String> uniqueItemSet = new HashSet<>();
-
-        // Calculate type frequency
         Map<String, Integer> typeFrequency = calculateTypeFrequency(items);
 
         for (Map<String, Object> item : items) {
@@ -128,9 +122,6 @@ public class StylingFragment extends Fragment {
         return uniqueItemsList;
     }
 
-
-
-
     private Map<String, Integer> calculateTypeFrequency(List<Map<String, Object>> items) {
         Map<String, Integer> typeFrequency = new HashMap<>();
         for (Map<String, Object> item : items) {
@@ -156,15 +147,12 @@ public class StylingFragment extends Fragment {
                     !itemId.isEmpty() &&
                     itemStatus == 1) {
 
-                // Fetch type and color from the Inventory collection using the ID
                 Map<String, Object> inventoryItem = inventory.get(itemId);
 
-                // Add Id, type, and color to the filtered items
                 if (inventoryItem != null) {
                     Map<String, Object> filteredItem = new HashMap<>();
                     filteredItem.put("Id", itemId);
                     filteredItem.put("Type", inventoryItem.get("Type"));
-//                    filteredItem.put("Color", inventoryItem.get("Color"));
                     filteredItems.add(filteredItem);
                 }
             }
@@ -216,7 +204,6 @@ public class StylingFragment extends Fragment {
                 }
                 System.out.println("Usage data loaded: " + usageData);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 showToast("Failed to load Usage data from Firebase: " + databaseError.getMessage());
