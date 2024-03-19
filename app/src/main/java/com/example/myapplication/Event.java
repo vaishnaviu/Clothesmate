@@ -5,38 +5,31 @@ public class Event {
     private int status, newUse;
     private String dateTime, id, color,type, weather, occasion;
     private boolean isSelected;
-
     public Event(){
     }
     public Event(String dateTime){
         this.dateTime = dateTime;
     }
-
     public Event(String id, String dateTime, int newUse, String type){
         this.id = id;
         this.dateTime = dateTime;
         this.newUse = newUse;
         this.type = type;
     }
-
     public Event(String id, String dateTime, String type){
         this.id = id;
         this.dateTime = dateTime;
         this.type = type;
     }
-
     public String getId(){
         return id;
     }
-
     public String getDateTime(){
         return dateTime;
     }
-
     public String getDate() {
         String date;
         String parsing_dateTime = this.dateTime;
-
         // Split the dateTime string based on space and take the first part
         date = parsing_dateTime.split(" ")[0];
 
